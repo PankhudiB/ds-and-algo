@@ -2,6 +2,7 @@ package tree;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 public class Traversal {
     public static void main(String[] args) {
@@ -28,6 +29,10 @@ public class Traversal {
         inOrder(node1);
         System.out.println();
 
+        System.out.println("InOrder without Recursion");
+        inOrderWithoutRecursion(node1);
+        System.out.println();
+
         System.out.println("PreOrder");
         preOrder(node1);
         System.out.println();
@@ -52,6 +57,29 @@ public class Traversal {
         inOrder(head.left);
         System.out.print(head.val + "=");
         inOrder(head.right);
+    }
+
+    public static void inOrderWithoutRecursion(Node head) {
+        if (head == null)
+            return;
+
+        Stack<Node> stack = new Stack<>();
+        Node curr = head;
+
+        while (curr != null || stack.size() > 0) {
+            while (curr != null) {
+                stack.push(curr);
+                curr = curr.left;
+            }
+            curr = stack.pop();
+            System.out.print(curr.val + "=");
+            curr = curr.right;
+        }
+    }
+
+    private static void pushLeftChildsToStack(Node curr, Stack<Node> stack) {
+        curr = curr.left;
+
     }
 
     public static void preOrder(Node head) {
