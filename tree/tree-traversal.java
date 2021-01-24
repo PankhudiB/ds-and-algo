@@ -1,5 +1,8 @@
 package tree;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 class TreeNode {
     int val;
     TreeNode left;
@@ -16,6 +19,11 @@ class TreeNode {
         this.val = val;
         this.left = left;
         this.right = right;
+    }
+
+    @Override
+    public String toString() {
+        return val + "";
     }
 }
 
@@ -54,6 +62,10 @@ class TreeTraversal {
 
         System.out.println("LevelOrder");
         printLevelOrderWithoutQueue(node1);
+        System.out.println();
+
+        System.out.println("LevelOrder Using Queue");
+        printLevelOrderUsingQueue(node1);
         System.out.println();
     }
 
@@ -110,5 +122,16 @@ class TreeTraversal {
         int leftDepth = depth(head.left) + 1;
         int rightDepth = depth(head.right) + 1;
         return Math.max(leftDepth, rightDepth);
+    }
+
+    public static void printLevelOrderUsingQueue(TreeNode head) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(head);
+        while (!queue.isEmpty()) {
+            TreeNode curr = queue.poll();
+            System.out.print(curr.val + "-");
+            if (curr.left != null) queue.add(curr.left);
+            if (curr.right != null) queue.add(curr.right);
+        }
     }
 }
