@@ -3,38 +3,14 @@ package tree;
 import java.util.LinkedList;
 import java.util.Queue;
 
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-
-    TreeNode() {
-    }
-
-    TreeNode(int val) {
-        this.val = val;
-    }
-
-    TreeNode(int val, TreeNode left, TreeNode right) {
-        this.val = val;
-        this.left = left;
-        this.right = right;
-    }
-
-    @Override
-    public String toString() {
-        return val + "";
-    }
-}
-
-class TreeTraversal {
+public class Traversal {
     public static void main(String[] args) {
-        TreeNode node1 = new TreeNode(1);
-        TreeNode node2 = new TreeNode(2);
-        TreeNode node3 = new TreeNode(3);
-        TreeNode node4 = new TreeNode(4);
-        TreeNode node5 = new TreeNode(5);
-        TreeNode node6 = new TreeNode(6);
+        Node node1 = new Node(1);
+        Node node2 = new Node(2);
+        Node node3 = new Node(3);
+        Node node4 = new Node(4);
+        Node node5 = new Node(5);
+        Node node6 = new Node(6);
 
 //                  1
 //            2          3
@@ -49,61 +25,61 @@ class TreeTraversal {
         System.out.println("depth: " + depth(node1));
 
         System.out.println("InOrder");
-        printInOrder(node1);
+        inOrder(node1);
         System.out.println();
 
         System.out.println("PreOrder");
-        printPreOrder(node1);
+        preOrder(node1);
         System.out.println();
 
         System.out.println("PostOrder");
-        printPostOrder(node1);
+        postOrder(node1);
         System.out.println();
 
         System.out.println("LevelOrder");
-        printLevelOrderWithoutQueue(node1);
+        levelOrderWithoutQueue(node1);
         System.out.println();
 
         System.out.println("LevelOrder Using Queue");
-        printLevelOrderUsingQueue(node1);
+        levelOrderUsingQueue(node1);
         System.out.println();
     }
 
-    public static void printInOrder(TreeNode head) {
+    public static void inOrder(Node head) {
         if (head == null) {
             return;
         }
-        printInOrder(head.left);
+        inOrder(head.left);
         System.out.print(head.val + "=");
-        printInOrder(head.right);
+        inOrder(head.right);
     }
 
-    public static void printPreOrder(TreeNode head) {
+    public static void preOrder(Node head) {
         if (head == null) {
             return;
         }
         System.out.print(head.val + "=");
-        printPreOrder(head.left);
-        printPreOrder(head.right);
+        preOrder(head.left);
+        preOrder(head.right);
     }
 
-    public static void printPostOrder(TreeNode head) {
+    public static void postOrder(Node head) {
         if (head == null) {
             return;
         }
-        printPostOrder(head.left);
-        printPostOrder(head.right);
+        postOrder(head.left);
+        postOrder(head.right);
         System.out.print(head.val + "=");
     }
 
-    public static void printLevelOrderWithoutQueue(TreeNode head) {
+    public static void levelOrderWithoutQueue(Node head) {
         int depth = depth(head);
         for (int i = 0; i <= depth; i++) {
             printGivenLevel(head, i);
         }
     }
 
-    private static void printGivenLevel(TreeNode node, int level) {
+    private static void printGivenLevel(Node node, int level) {
         if (node == null) {
             return;
         }
@@ -115,7 +91,7 @@ class TreeTraversal {
         }
     }
 
-    private static int depth(TreeNode head) {
+    private static int depth(Node head) {
         if (head == null) {
             return 0;
         }
@@ -124,11 +100,11 @@ class TreeTraversal {
         return Math.max(leftDepth, rightDepth);
     }
 
-    public static void printLevelOrderUsingQueue(TreeNode head) {
-        Queue<TreeNode> queue = new LinkedList<>();
+    public static void levelOrderUsingQueue(Node head) {
+        Queue<Node> queue = new LinkedList<>();
         queue.add(head);
         while (!queue.isEmpty()) {
-            TreeNode curr = queue.poll();
+            Node curr = queue.poll();
             System.out.print(curr.val + "=");
             if (curr.left != null) queue.add(curr.left);
             if (curr.right != null) queue.add(curr.right);
