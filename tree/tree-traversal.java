@@ -26,11 +26,19 @@ class TreeTraversal {
         TreeNode node3 = new TreeNode(3);
         TreeNode node4 = new TreeNode(4);
         TreeNode node5 = new TreeNode(5);
+        TreeNode node6 = new TreeNode(6);
 
+//                  1
+//            2          3
+//        4       5
+//                    6
         node1.left = node2;
         node1.right = node3;
         node2.left = node4;
         node2.right = node5;
+        node5.right = node6;
+
+        System.out.println("depth: " + depth(node1));
 
         System.out.println("InOrder");
         printInOrder(node1);
@@ -43,10 +51,14 @@ class TreeTraversal {
         System.out.println("PostOrder");
         printPostOrder(node1);
         System.out.println();
+
+        System.out.println("LevelOrder");
+        printLevelOrderWithoutQueue(node1);
+        System.out.println();
     }
 
     public static void printInOrder(TreeNode head) {
-        if (head == null){
+        if (head == null) {
             return;
         }
         printInOrder(head.left);
@@ -55,7 +67,7 @@ class TreeTraversal {
     }
 
     public static void printPreOrder(TreeNode head) {
-        if (head == null){
+        if (head == null) {
             return;
         }
         System.out.print(head.val + "-");
@@ -64,11 +76,39 @@ class TreeTraversal {
     }
 
     public static void printPostOrder(TreeNode head) {
-        if (head == null){
+        if (head == null) {
             return;
         }
         printPostOrder(head.left);
         printPostOrder(head.right);
         System.out.print(head.val + "-");
+    }
+
+    public static void printLevelOrderWithoutQueue(TreeNode head) {
+        int depth = depth(head);
+        for (int i = 0; i <= depth; i++) {
+            printGivenLevel(head, i);
+        }
+    }
+
+    private static void printGivenLevel(TreeNode node, int level) {
+        if (node == null) {
+            return;
+        }
+        if (level == 1) {
+            System.out.print(node.val + "-");
+        } else if (level > 1) {
+            printGivenLevel(node.left, level - 1);
+            printGivenLevel(node.right, level - 1);
+        }
+    }
+
+    private static int depth(TreeNode head) {
+        if (head == null) {
+            return 0;
+        }
+        int leftDepth = depth(head.left) + 1;
+        int rightDepth = depth(head.right) + 1;
+        return Math.max(leftDepth, rightDepth);
     }
 }
