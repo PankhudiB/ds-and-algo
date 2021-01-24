@@ -74,7 +74,7 @@ class TreeTraversal {
             return;
         }
         printInOrder(head.left);
-        System.out.print(head.val + "-");
+        System.out.print(head.val + "=");
         printInOrder(head.right);
     }
 
@@ -82,7 +82,7 @@ class TreeTraversal {
         if (head == null) {
             return;
         }
-        System.out.print(head.val + "-");
+        System.out.print(head.val + "=");
         printPreOrder(head.left);
         printPreOrder(head.right);
     }
@@ -93,7 +93,7 @@ class TreeTraversal {
         }
         printPostOrder(head.left);
         printPostOrder(head.right);
-        System.out.print(head.val + "-");
+        System.out.print(head.val + "=");
     }
 
     public static void printLevelOrderWithoutQueue(TreeNode head) {
@@ -108,7 +108,7 @@ class TreeTraversal {
             return;
         }
         if (level == 1) {
-            System.out.print(node.val + "-");
+            System.out.print(node.val + "=");
         } else if (level > 1) {
             printGivenLevel(node.left, level - 1);
             printGivenLevel(node.right, level - 1);
@@ -129,7 +129,7 @@ class TreeTraversal {
         queue.add(head);
         while (!queue.isEmpty()) {
             TreeNode curr = queue.poll();
-            System.out.print(curr.val + "-");
+            System.out.print(curr.val + "=");
             if (curr.left != null) queue.add(curr.left);
             if (curr.right != null) queue.add(curr.right);
         }
