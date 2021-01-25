@@ -77,11 +77,6 @@ public class Traversal {
         }
     }
 
-    private static void pushLeftChildsToStack(Node curr, Stack<Node> stack) {
-        curr = curr.left;
-
-    }
-
     public static void preOrder(Node head) {
         if (head == null) {
             return;
