@@ -48,6 +48,10 @@ public class Traversal {
         System.out.println("LevelOrder Using Queue");
         levelOrderUsingQueue(node1);
         System.out.println();
+
+        System.out.println("Zigzag LevelOrder");
+        zigzagLevelOrder(node1);
+        System.out.println();
     }
 
     public static void inOrder(Node head) {
@@ -131,6 +135,33 @@ public class Traversal {
             System.out.print(curr.val + "=");
             if (curr.left != null) queue.add(curr.left);
             if (curr.right != null) queue.add(curr.right);
+        }
+    }
+
+    public static void zigzagLevelOrder(Node head) {
+        Stack<Node> currLevel = new Stack<>();
+        Stack<Node> nextLevel = new Stack<>();
+        currLevel.push(head);
+        boolean printRightToLeft = true;
+
+        while (!currLevel.isEmpty()) {
+            Node popped = currLevel.pop();
+            System.out.print(popped.val + "==");
+
+            if (printRightToLeft) {
+                if (popped.left != null) nextLevel.push(popped.left);
+                if (popped.right != null) nextLevel.push(popped.right);
+            } else {
+                if (popped.right != null) nextLevel.push(popped.right);
+                if (popped.left != null) nextLevel.push(popped.left);
+            }
+
+            if (currLevel.isEmpty()) {
+                printRightToLeft = !printRightToLeft;
+                Stack<Node> temp = currLevel;
+                currLevel = nextLevel;
+                nextLevel = temp;
+            }
         }
     }
 }
