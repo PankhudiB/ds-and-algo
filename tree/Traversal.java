@@ -101,7 +101,7 @@ public class Traversal {
         System.out.print(head.val + "=");
     }
 
-    void levelOrderWithoutQueue(Node head) {
+    public void levelOrderWithoutQueue(Node head) {
         int depth = depth(head);
         for (int i = 0; i <= depth; i++) {
             printGivenLevel(head, i);
