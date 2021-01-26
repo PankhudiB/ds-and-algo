@@ -13,6 +13,8 @@ package linked_list;
 
 class RemoveNodesWithValueK {
     public static void main(String[] args) {
+        LinkedListHelper helper = new LinkedListHelper();
+
         ListNode node1 = new ListNode(3);
         ListNode node2 = new ListNode(2);
         ListNode node3 = new ListNode(3);
@@ -31,9 +33,9 @@ class RemoveNodesWithValueK {
         node7.next = node8;
 
         RemoveNodesWithValueK l = new RemoveNodesWithValueK();
-        l.printList(node1);
+        helper.printList(node1);
         ListNode modifiedHead = l.removeNodesWithValueK(node1, 3);
-        l.printList(modifiedHead);
+        helper.printList(modifiedHead);
     }
 
     ListNode removeNodesWithValueK(ListNode head, int k) {
@@ -52,13 +54,4 @@ class RemoveNodesWithValueK {
         }
         return dummy.next;
     }
-
-    private void printList(ListNode head) {
-        while (head != null){
-            System.out.print(head.val + "-");
-            head = head.next;
-        }
-        System.out.println();
-    }
-
 }

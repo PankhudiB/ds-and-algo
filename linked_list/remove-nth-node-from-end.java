@@ -1,35 +1,9 @@
 package linked_list;
 
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- * int val;
- * ListNode next;
- * ListNode() {}
- * ListNode(int val) { this.val = val; }
- * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
- */
-
-class ListNode {
-    int val;
-    ListNode next;
-
-    ListNode() {
-    }
-
-    ListNode(int val) {
-        this.val = val;
-    }
-
-    ListNode(int val, ListNode next) {
-        this.val = val;
-        this.next = next;
-    }
-}
-
 class RemoveNthNodeFromEnd {
     public static void main(String[] args) {
+        LinkedListHelper helper = new LinkedListHelper();
+
         ListNode node1 = new ListNode(1);
         ListNode node2 = new ListNode(2);
         ListNode node3 = new ListNode(3);
@@ -48,9 +22,9 @@ class RemoveNthNodeFromEnd {
         node7.next = node8;
 
         RemoveNthNodeFromEnd l = new RemoveNthNodeFromEnd();
-        l.printList(node1);
+        helper.printList(node1);
         ListNode modifiedHead = l.removeNthFromEnd(node1, 3);
-        l.printList(modifiedHead);
+        helper.printList(modifiedHead);
     }
 
     public ListNode removeNthFromEnd(ListNode head, int n) {
@@ -71,13 +45,5 @@ class RemoveNthNodeFromEnd {
         nthPrevFromEnd.next = nthPrevFromEnd.next.next;
 
         return dummy.next;
-    }
-
-    private void printList(ListNode head) {
-        while (head != null) {
-            System.out.print(head.val + "-");
-            head = head.next;
-        }
-        System.out.println();
     }
 }
