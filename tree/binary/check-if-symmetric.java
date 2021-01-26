@@ -24,17 +24,18 @@ class CheckIfSymmetric {
         node2r.left = node2r3;
         node2r.right = node2r4;
 
-        System.out.println("isSymmetric :" + isSymmetric(node1));
+        CheckIfSymmetric c = new CheckIfSymmetric();
+        System.out.println("isSymmetric :" + c.isSymmetric(node1));
     }
 
-    public static boolean isSymmetric(Node head) {
+    public boolean isSymmetric(Node head) {
         if (head == null) {
             return true;
         }
         return isSymmetric(head.left, head.right);
     }
 
-    private static boolean isSymmetric(Node left, Node right) {
+    private boolean isSymmetric(Node left, Node right) {
         if (left == null || right == null) return left == right;
         if (left.val != right.val) return false;
         return isSymmetric(left.left, right.right) && isSymmetric(left.right, right.left);

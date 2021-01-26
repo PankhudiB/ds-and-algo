@@ -5,17 +5,19 @@ import tree.Traversal;
 
 class SortedArrayToBinarySearchTree {
     public static void main(String[] args) {
+        SortedArrayToBinarySearchTree s = new SortedArrayToBinarySearchTree();
         int[] sortedArr = new int[]{-10, -3, 0, 5, 9};
-        Node head = sortedArrayToBinarySearchTree(sortedArr);
-        Traversal.inOrder(head);
+        Node head = s.sortedArrayToBinarySearchTree(sortedArr);
+        Traversal traversal = new Traversal();
+        traversal.inOrder(head);
     }
 
-    public static Node sortedArrayToBinarySearchTree(int[] arr) {
+    public Node sortedArrayToBinarySearchTree(int[] arr) {
         if (arr.length == 0) return null;
         return sortedArrayToBinarySearchTree(arr, 0, arr.length - 1);
     }
 
-    private static Node sortedArrayToBinarySearchTree(int[] arr, int start, int end) {
+    private Node sortedArrayToBinarySearchTree(int[] arr, int start, int end) {
         if (start > end) return null;
         int middle = start + ((end - start) / 2);
         Node middleNode = new Node(arr[middle]);

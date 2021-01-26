@@ -14,14 +14,15 @@ class Tuple<T, U> {
 
 class LengthOFLongestChain {
     public static void main(String[] args) {
-        Node variant1Head = getBinaryTreeVariant1();
-        System.out.println("longest chain length :" + longestChain(variant1Head));
+        LengthOFLongestChain l = new LengthOFLongestChain();
+        Node variant1Head = l.getBinaryTreeVariant1();
+        System.out.println("longest chain length :" + l.longestChain(variant1Head));
 
-        Node variant2Head = getBinaryTreeVariant2();
-        System.out.println("longest chain length :" + longestChain(variant2Head));
+        Node variant2Head = l.getBinaryTreeVariant2();
+        System.out.println("longest chain length :" + l.longestChain(variant2Head));
     }
 
-    private static Node getBinaryTreeVariant2() {
+    private Node getBinaryTreeVariant2() {
 //                    1
 //                 /      \
 //                2         3
@@ -65,7 +66,7 @@ class LengthOFLongestChain {
         return node1;
     }
 
-    private static Node getBinaryTreeVariant1() {
+    private Node getBinaryTreeVariant1() {
 //                  1
 //            2          3
 //        4       5   6     7
@@ -92,11 +93,11 @@ class LengthOFLongestChain {
         return node1;
     }
 
-    public static int longestChain(Node head) {
+    public int longestChain(Node head) {
         return maxChainLength(head).maxChainLength;
     }
 
-    private static Tuple<Integer, Integer> maxChainLength(Node head) {
+    private Tuple<Integer, Integer> maxChainLength(Node head) {
         if (head == null) {
             return new Tuple<Integer, Integer>(0, 0);
         }

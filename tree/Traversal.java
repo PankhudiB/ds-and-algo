@@ -23,38 +23,40 @@ public class Traversal {
         node2.right = node5;
         node5.right = node6;
 
-        System.out.println("depth: " + depth(node1));
+        Traversal traversal = new Traversal();
+
+        System.out.println("depth: " + traversal.depth(node1));
 
         System.out.println("InOrder");
-        inOrder(node1);
+        traversal.inOrder(node1);
         System.out.println();
 
         System.out.println("InOrder without Recursion");
-        inOrderWithoutRecursion(node1);
+        traversal.inOrderWithoutRecursion(node1);
         System.out.println();
 
         System.out.println("PreOrder");
-        preOrder(node1);
+        traversal.preOrder(node1);
         System.out.println();
 
         System.out.println("PostOrder");
-        postOrder(node1);
+        traversal.postOrder(node1);
         System.out.println();
 
         System.out.println("LevelOrder");
-        levelOrderWithoutQueue(node1);
+        traversal.levelOrderWithoutQueue(node1);
         System.out.println();
 
         System.out.println("LevelOrder Using Queue");
-        levelOrderUsingQueue(node1);
+        traversal.levelOrderUsingQueue(node1);
         System.out.println();
 
         System.out.println("Zigzag LevelOrder");
-        zigzagLevelOrder(node1);
+        traversal.zigzagLevelOrder(node1);
         System.out.println();
     }
 
-    public static void inOrder(Node head) {
+    public void inOrder(Node head) {
         if (head == null) {
             return;
         }
@@ -63,7 +65,7 @@ public class Traversal {
         inOrder(head.right);
     }
 
-    public static void inOrderWithoutRecursion(Node head) {
+    void inOrderWithoutRecursion(Node head) {
         if (head == null)
             return;
 
@@ -81,7 +83,7 @@ public class Traversal {
         }
     }
 
-    public static void preOrder(Node head) {
+    void preOrder(Node head) {
         if (head == null) {
             return;
         }
@@ -90,7 +92,7 @@ public class Traversal {
         preOrder(head.right);
     }
 
-    public static void postOrder(Node head) {
+    void postOrder(Node head) {
         if (head == null) {
             return;
         }
@@ -99,14 +101,14 @@ public class Traversal {
         System.out.print(head.val + "=");
     }
 
-    public static void levelOrderWithoutQueue(Node head) {
+    void levelOrderWithoutQueue(Node head) {
         int depth = depth(head);
         for (int i = 0; i <= depth; i++) {
             printGivenLevel(head, i);
         }
     }
 
-    private static void printGivenLevel(Node node, int level) {
+    private void printGivenLevel(Node node, int level) {
         if (node == null) {
             return;
         }
@@ -118,7 +120,7 @@ public class Traversal {
         }
     }
 
-    private static int depth(Node head) {
+    private int depth(Node head) {
         if (head == null) {
             return 0;
         }
@@ -127,7 +129,7 @@ public class Traversal {
         return Math.max(leftDepth, rightDepth);
     }
 
-    public static void levelOrderUsingQueue(Node head) {
+    void levelOrderUsingQueue(Node head) {
         Queue<Node> queue = new LinkedList<>();
         queue.add(head);
         while (!queue.isEmpty()) {
@@ -138,7 +140,7 @@ public class Traversal {
         }
     }
 
-    public static void zigzagLevelOrder(Node head) {
+    void zigzagLevelOrder(Node head) {
         Stack<Node> currLevel = new Stack<>();
         Stack<Node> nextLevel = new Stack<>();
         currLevel.push(head);

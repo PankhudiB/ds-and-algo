@@ -47,12 +47,13 @@ class RemoveNthNodeFromEnd {
         node6.next = node7;
         node7.next = node8;
 
-        printList(node1);
-        ListNode modifiedHead = removeNthFromEnd(node1, 3);
-        printList(modifiedHead);
+        RemoveNthNodeFromEnd l = new RemoveNthNodeFromEnd();
+        l.printList(node1);
+        ListNode modifiedHead = l.removeNthFromEnd(node1, 3);
+        l.printList(modifiedHead);
     }
 
-    public static ListNode removeNthFromEnd(ListNode head, int n) {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
         ListNode dummy = new ListNode(0);
         dummy.next = head;
         ListNode nthPrevFromEnd = dummy;
@@ -72,7 +73,7 @@ class RemoveNthNodeFromEnd {
         return dummy.next;
     }
 
-    private static void printList(ListNode head) {
+    private void printList(ListNode head) {
         while (head != null) {
             System.out.print(head.val + "-");
             head = head.next;

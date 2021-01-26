@@ -16,11 +16,11 @@ class LonelyNumberUsingSet {
         for (int i = 0; i < size; i++) {
             input[i] = sc.nextInt();
         }
-
-        System.out.println(findLonelyNumber(input));
+        LonelyNumberUsingSet l = new LonelyNumberUsingSet();
+        System.out.println(l.findLonelyNumber(input));
     }
 
-    private static int findLonelyNumber(int[] arr) {
+    private int findLonelyNumber(int[] arr) {
         Set<Integer> set = new HashSet<Integer>();
         int sumOfUniqueElements = 0;
         int sumOfAllElements = 0;

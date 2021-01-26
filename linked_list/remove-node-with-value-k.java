@@ -30,12 +30,13 @@ class RemoveNodesWithValueK {
         node6.next = node7;
         node7.next = node8;
 
-        printList(node1);
-        ListNode modifiedHead = removeNodesWithValueK(node1, 3);
-        printList(modifiedHead);
+        RemoveNodesWithValueK l = new RemoveNodesWithValueK();
+        l.printList(node1);
+        ListNode modifiedHead = l.removeNodesWithValueK(node1, 3);
+        l.printList(modifiedHead);
     }
 
-    static ListNode removeNodesWithValueK(ListNode head, int k) {
+    ListNode removeNodesWithValueK(ListNode head, int k) {
         ListNode dummy = new ListNode(0);
         dummy.next = head;
         ListNode prev = dummy;
@@ -52,7 +53,7 @@ class RemoveNodesWithValueK {
         return dummy.next;
     }
 
-    private static void printList(ListNode head) {
+    private void printList(ListNode head) {
         while (head != null){
             System.out.print(head.val + "-");
             head = head.next;

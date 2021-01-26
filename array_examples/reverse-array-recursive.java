@@ -6,7 +6,7 @@ import java.io.*;
 
 /* Name of the class has to be "Main" only if the class is public. */
 class ReverseArrayRecursive {
-    static void reverseArray(int[] arr, int start, int end) {
+    void reverseArray(int[] arr, int start, int end) {
         if (start >= end)
             return;
 
@@ -28,7 +28,8 @@ class ReverseArrayRecursive {
             input[i] = sc.nextInt();
         }
 
-        reverseArray(input, start, end);
+        ReverseArrayRecursive r = new ReverseArrayRecursive();
+        r.reverseArray(input, start, end);
 
         for (int i = 0; i < size; i++) {
             System.out.print(input[i] + " ");

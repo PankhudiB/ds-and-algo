@@ -2,7 +2,7 @@ package linked_list;
 
 class GfG
 {
-    public static ListNode reverse(ListNode head, int k)
+    public ListNode reverse(ListNode head, int k)
     {
         ListNode prev = null;
         ListNode curr = head;
