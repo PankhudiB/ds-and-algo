@@ -92,7 +92,7 @@ public class Traversal {
         preOrder(head.right);
     }
 
-    void postOrder(Node head) {
+    public void postOrder(Node head) {
         if (head == null) {
             return;
         }
