@@ -20,10 +20,11 @@ public class LinkedListHelper {
     }
 
     public void printList(ListNode head) {
+        if (head == null) System.out.print("Null");
         while (head != null) {
             System.out.print(head.val + "-");
             head = head.next;
         }
-        System.out.println();
+        System.out.println("");
     }
 }
