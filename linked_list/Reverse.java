@@ -9,7 +9,7 @@ class Reverse {
         System.out.print("reversed : ");
         helper.printList(reversed);
 
-        ListNode reversed2 = r.reverse(helper.getListWithNum(new int[]{1}));
+        ListNode reversed2 = r.reverseRecursive(helper.getListWithNum(new int[]{1,2,3}));
         System.out.print("reversed : ");
         helper.printList(reversed2);
     }
@@ -24,6 +24,14 @@ class Reverse {
             curr = next;
         }
         return prev;
+    }
+
+    ListNode reverseRecursive(ListNode curr) {
+        if (curr == null || curr.next == null) return curr;
+        ListNode p = reverseRecursive(curr.next);
+        curr.next.next = curr;
+        curr.next = null;
+        return p;
     }
 
 }
