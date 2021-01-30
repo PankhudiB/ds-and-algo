@@ -21,15 +21,15 @@ class DetectCycle {
         System.out.print("has cycle : " + l.detectCycle(helper.getListWithNum(new int[]{1, 2, 1})));
     }
 
-    boolean detectCycle(ListNode head) {
+    ListNode detectCycle(ListNode head) {
         ListNode slow = head;
         ListNode fast = head;
         while (slow != null && fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
-            if (slow == fast) return true;
+            if (slow == fast) return slow;
         }
-        return false;
+        return null;
     }
 
 }
