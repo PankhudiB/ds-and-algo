@@ -39,4 +39,22 @@ class MergeMultipleLinkedLists {
         prev.next = (l1 == null) ? l2 : l1;
         return preHead.next;
     }
+
+    ListNode mergeDivideAndConquer(ListNode[] lists) {
+        int last = lists.length - 1;
+        int i = 0;
+        int j = last;
+
+        while (last != 0) {
+            while (i < j) {
+                lists[i] = merge(lists[i], lists[j]);
+                i++;
+                j--;
+                if (i >= j) {
+                    last = j;
+                }
+            }
+        }
+        return lists[0];
+    }
 }
