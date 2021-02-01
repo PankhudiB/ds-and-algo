@@ -40,6 +40,16 @@ class MergeMultipleLinkedLists {
         return preHead.next;
     }
 
+    // if 4 elements in alllists
+    // loop 1
+    // i = 0 , j = 3
+    // arr[0] = merger([0],[3]) i++,j-- i->1 , j->2
+    // arr[1] = merger([1],[2]) i++,j-- i->2 , j->1
+    // i > j ---> set last=1 (bcoz only 2 elements left)
+    // loop 2 -> last = 1
+    // arr[0] = merger([0],[1]) i++,j-- i->1 , j->0
+    // i > j ---> set last=0 (bcoz only 1 element left)
+    // arr[0] is
     ListNode mergeDivideAndConquer(ListNode[] lists) {
         int last = lists.length - 1;
         int i = 0;
