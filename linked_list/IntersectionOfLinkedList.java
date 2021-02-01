@@ -36,7 +36,7 @@ class IntersectionOfLinkedList {
 
         System.out.println("getIntersection using count difference");
         System.out.println(listUtility.getIntersectionUsingCountDifference(node1, node8) + "\n====================================");
-        System.out.println(listUtility.getIntersectionUsingCountDifference(nonIntersectingL1, nonIntersectingL2) + "\n====================================");
+        System.out.println(listUtility.getIntersectionUsingCountDifference(nonIntersectingL1, nonIntersectingL2) + "\n=================================================================");
 
         System.out.println("getIntersection make loop in 1st and detect loop in 2nd");
         System.out.println(listUtility.getIntersectionMakeCircleIn1stAndFindLoopIn2nd(node1, node8) + "\n====================================");
@@ -95,15 +95,26 @@ class IntersectionOfLinkedList {
     ListNode getIntersectionMakeCircleIn1stAndFindLoopIn2nd(ListNode head1, ListNode head2) {
         ListNode curr1 = head1;
         ListNode curr2 = head2;
+        ListNode intersectingAt = null;
+        int count1 = 0;
         while (curr1.next != null) {
+            count1++;
             curr1 = curr1.next;
         }
         ListNode last = curr1;
         // create loop in first linked list
         curr1.next = head1;
-
-        DetectCycle l = new DetectCycle();
-        return l.detectCycle(curr2);
+        ListNode ptr = new ListNode(-1, curr2);
+        for (int i = 0; i < count1; i++) {
+            curr2 = curr2.next;
+        }
+        for (int i = 0; i < count1 && curr2.next != null; i++) {
+            if (ptr == curr2) intersectingAt = curr2;
+            ptr = ptr.next;
+            curr2 = curr2.next;
+        }
+        last.next = null;
+        return intersectingAt;
     }
 
 }
