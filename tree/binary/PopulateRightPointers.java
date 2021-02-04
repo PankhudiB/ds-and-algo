@@ -24,10 +24,13 @@ class PopulateRightPointers {
     public static void main(String[] args) {
         PopulateRightPointers r = new PopulateRightPointers();
         NodeR treeWithRightNeighbourConnected = r.connect(getCompleteBinaryTree());
+        NodeR treeWithRightNeighbourConnected2 = r.connectWithoutUsingQueue(getCompleteBinaryTree());
         r.levelOrderUsingQueue(treeWithRightNeighbourConnected);
+        r.levelOrderUsingQueue(treeWithRightNeighbourConnected2);
     }
 
     NodeR connect(NodeR head) {
+        if (head == null) return null;
         Queue<NodeR> q = new LinkedList<>();
         q.add(head);
         while (!q.isEmpty()) {
@@ -41,6 +44,29 @@ class PopulateRightPointers {
             }
         }
         return head;
+    }
+
+    NodeR connectWithoutUsingQueue(NodeR head) {
+        NodeR leftmost = head;
+        while (leftmost != null) {
+            populateRightPtrs(leftmost);
+            leftmost = leftmost.left;  // going each level from leftmost node
+        }
+        return head;
+    }
+
+    private void populateRightPtrs(NodeR node) {
+        while (node != null) {
+            // set it for left nodes -> which is obvious set it to right node of its own parent
+            node.left.next = node.right;
+
+            //for curr right.next -> leverage the link already created in previous step
+            if (node.next != null) {
+                node.right.next = node.next.left;
+            }
+            //keep moving in horizontal line -->
+            node = node.next;
+        }
     }
 
     private static NodeR getCompleteBinaryTree() {
