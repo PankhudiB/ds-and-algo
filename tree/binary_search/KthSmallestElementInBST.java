@@ -4,6 +4,7 @@ import tree.Node;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Stack;
 
 class KthSmallestElementInBST {
 
@@ -14,6 +15,8 @@ class KthSmallestElementInBST {
 
         Node anotherBst = getBSTVariant2();
         System.out.println("kthSmallestElementInBST :" + c.kthSmallestElementInBST(anotherBst, 1));
+
+        System.out.println("kthSmallestElementInBST UsingInorderIterative :" + c.kthSmallestElementInBSTUsingInorderIterative(anotherBst, 1));
     }
 
     private static Node getBSTVariant2() {
@@ -68,5 +71,25 @@ class KthSmallestElementInBST {
         inorder(node.left, inorderTraversal);
         inorderTraversal.add(node.val);
         inorder(node.right, inorderTraversal);
+    }
+
+    public int kthSmallestElementInBSTUsingInorderIterative(Node head, int k) {
+        return inorderIterative(head, k);
+    }
+
+    private int inorderIterative(Node head, int k) {
+        Node curr = head;
+        Stack<Node> stack = new Stack<>();
+
+        while (curr != null || !stack.isEmpty()) {
+            while (curr != null) {
+                stack.push(curr);
+                curr = curr.left;
+            }
+            curr = stack.pop();
+            if (--k == 0) return curr.val;
+            curr = curr.right;
+        }
+        return -1;
     }
 }
