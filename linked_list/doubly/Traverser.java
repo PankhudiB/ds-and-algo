@@ -1,15 +1,21 @@
 package linked_list.doubly;
 
+import tree.Node;
 import util.Tuple;
 
 public class Traverser {
+    DListNode head;
     public static void main(String[] args) {
         Tuple<DListNode, DListNode> headAndTail = getDoublyLinkedList();
         Traverser traverser = new Traverser();
-        System.out.println("forward : ");
-        traverser.forward(headAndTail.first);
-        System.out.println("\nbackward : ");
-        traverser.backward(headAndTail.second);
+        traverser.printForwardAndBackward(headAndTail);
+    }
+
+    private void printForwardAndBackward(Tuple<DListNode, DListNode> headAndTail) {
+        System.out.println("fwd : ");
+        forward(headAndTail.first);
+        System.out.print("| bckwd : ");
+        backward(headAndTail.second);
     }
 
     private void forward(DListNode head) {
