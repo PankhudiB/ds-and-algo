@@ -11,6 +11,9 @@ public class DLL {
         dll.addAtEnd(2);
         dll.addAtEnd(3);
         dll.printForwardAndBackward(dll.head);
+        dll.addAtFront(0);
+        System.out.println();
+        dll.printForwardAndBackward(dll.head);
     }
 
     private void printForwardAndBackward(DListNode head) {
@@ -44,5 +47,14 @@ public class DLL {
 
         last.next = new_node;
         new_node.prev = last;
+    }
+
+    private void addAtFront(int data) {
+        DListNode new_node = new DListNode(data);
+        new_node.next = head;
+        if (head != null)
+            head.prev = new_node;
+
+        head = new_node;
     }
 }
