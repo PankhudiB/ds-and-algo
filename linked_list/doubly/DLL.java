@@ -12,7 +12,8 @@ public class DLL {
         dll.addAtEnd(3);
         dll.printForwardAndBackward(dll.head);
         dll.addAtFront(0);
-        System.out.println();
+        dll.printForwardAndBackward(dll.head);
+        dll.insertAfter(dll.head.next, 9);
         dll.printForwardAndBackward(dll.head);
     }
 
@@ -30,6 +31,7 @@ public class DLL {
             System.out.print(last.val + " --> ");
             last = last.prev;
         }
+        System.out.println();
     }
 
     private void addAtEnd(int data) {
@@ -56,5 +58,15 @@ public class DLL {
             head.prev = new_node;
 
         head = new_node;
+    }
+
+    private void insertAfter(DListNode prev_Node, int data) {
+        DListNode new_node = new DListNode(data);
+        new_node.next = prev_Node.next;
+        new_node.prev = prev_Node;
+        if (prev_Node.next != null) {
+            prev_Node.next.prev = new_node;
+        }
+        prev_Node.next = new_node;
     }
 }
