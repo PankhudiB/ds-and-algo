@@ -1,4 +1,4 @@
-package linked_list;
+package linked_list.singly;
 
 class Reverse {
     public static void main(String[] args) {

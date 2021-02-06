@@ -1,7 +1,6 @@
-package linked_list;
+package linked_list.singly;
 
 import java.util.HashSet;
-import java.util.Hashtable;
 
 class IntersectionOfLinkedList {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package linked_list;
+package linked_list.singly;
 
 /**
  * Definition for singly-linked list.
