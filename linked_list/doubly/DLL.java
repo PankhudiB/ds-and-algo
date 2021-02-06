@@ -17,6 +17,11 @@ public class DLL {
         dll.printForwardAndBackward(dll.head);
         dll.insertBefore(dll.head.next, 33);
         dll.printForwardAndBackward(dll.head);
+        System.out.println("deleting :" + dll.head.next.val);
+        dll.delete(dll.head.next);
+        dll.printForwardAndBackward(dll.head);
+        dll.delete(dll.head);
+        dll.printForwardAndBackward(dll.head);
     }
 
     private void printForwardAndBackward(DListNode head) {
@@ -84,5 +89,18 @@ public class DLL {
         next_Node.prev = new_node;
         new_node.next = next_Node;
 
+    }
+
+    private void delete(DListNode del) {
+        if (del == null || head == null) return;
+        if (del == head) {
+            head = del.next;
+        }
+        if (del.next != null) {
+            del.next.prev = del.prev;
+        }
+        if (del.prev != null) {
+            del.prev.next = del.next;
+        }
     }
 }
