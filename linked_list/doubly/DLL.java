@@ -15,6 +15,8 @@ public class DLL {
         dll.printForwardAndBackward(dll.head);
         dll.insertAfter(dll.head.next, 9);
         dll.printForwardAndBackward(dll.head);
+        dll.insertBefore(dll.head.next, 33);
+        dll.printForwardAndBackward(dll.head);
     }
 
     private void printForwardAndBackward(DListNode head) {
@@ -68,5 +70,19 @@ public class DLL {
             prev_Node.next.prev = new_node;
         }
         prev_Node.next = new_node;
+    }
+
+    private void insertBefore(DListNode next_Node, int data) {
+        DListNode new_node = new DListNode(data);
+        if (next_Node == head) {
+            head = new_node;
+            next_Node.prev = new_node;
+            return;
+        }
+        new_node.prev = next_Node.prev;
+        next_Node.prev.next = new_node;
+        next_Node.prev = new_node;
+        new_node.next = next_Node;
+
     }
 }
