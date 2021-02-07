@@ -1,6 +1,4 @@
-package linked_list;
-
-import linked_list.doubly.DListNode;
+package linked_list.doubly;
 
 import java.util.Deque;
 import java.util.HashSet;
