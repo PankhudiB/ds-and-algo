@@ -1,52 +1,72 @@
 package linked_list.doubly;
 
-import util.Tuple;
-
 public class DLL {
     DListNode head;
+    DListNode tail;
+    int size;
+
+    public DLL() {
+        head = tail;
+    }
 
     public static void main(String[] args) {
         DLL dll = new DLL();
         dll.addAtEnd(1);
         dll.addAtEnd(2);
         dll.addAtEnd(3);
-        dll.printForwardAndBackward(dll.head);
+        dll.forwardAndBackward();
+
         dll.addAtFront(0);
-        dll.printForwardAndBackward(dll.head);
+        dll.forwardAndBackward();
+
         dll.insertAfter(dll.head.next, 9);
-        dll.printForwardAndBackward(dll.head);
+        dll.forwardAndBackward();
+
         dll.insertBefore(dll.head.next, 33);
-        dll.printForwardAndBackward(dll.head);
-        System.out.println("deleting :" + dll.head.next.val);
+        dll.forwardAndBackward();
+
+        System.out.println("\ndeleting :" + dll.head.next.val);
         dll.delete(dll.head.next);
-        dll.printForwardAndBackward(dll.head);
+        dll.forwardAndBackward();
+
         dll.delete(dll.head);
-        dll.printForwardAndBackward(dll.head);
+        dll.forwardAndBackward();
+
+        dll.delete(dll.tail);
+        dll.forwardAndBackward();
     }
 
-    private void printForwardAndBackward(DListNode head) {
-        DListNode curr = head;
-        DListNode last = null;
-        System.out.print("Fwd : ");
+    public void forwardAndBackward() {
+        forward();
+        System.out.print(" | ");
+        backward();
+        System.out.println(" | h :" + this.head.val + " t :" + this.tail.val);
+    }
+
+    public void forward() {
+        DListNode curr = this.head;
         while (curr != null) {
             System.out.print(curr.val + " --> ");
-            last = curr;
             curr = curr.next;
         }
-        System.out.print(" | Bckwd : ");
-        while (last != null) {
-            System.out.print(last.val + " --> ");
-            last = last.prev;
-        }
-        System.out.println();
     }
 
-    private void addAtEnd(int data) {
+    private void backward() {
+        DListNode curr = this.tail;
+        while (curr != null) {
+            System.out.print(curr.val + " --> ");
+            curr = curr.prev;
+        }
+    }
+
+    public void addAtEnd(int data) {
+        size++;
         DListNode new_node = new DListNode(data);
         DListNode last = head;
 
         if (head == null) {
             head = new_node;
+            tail = new_node;
             return;
         }
 
@@ -56,9 +76,11 @@ public class DLL {
 
         last.next = new_node;
         new_node.prev = last;
+        tail = new_node;
     }
 
-    private void addAtFront(int data) {
+    public void addAtFront(int data) {
+        size++;
         DListNode new_node = new DListNode(data);
         new_node.next = head;
         if (head != null)
@@ -67,7 +89,19 @@ public class DLL {
         head = new_node;
     }
 
-    private void insertAfter(DListNode prev_Node, int data) {
+    public void addAtFront(DListNode new_node) {
+        size++;
+        new_node.next = head;
+        if (head != null)
+            head.prev = new_node;
+        if (head == null) {
+            tail = new_node;
+        }
+        head = new_node;
+    }
+
+    public void insertAfter(DListNode prev_Node, int data) {
+        size++;
         DListNode new_node = new DListNode(data);
         new_node.next = prev_Node.next;
         new_node.prev = prev_Node;
@@ -75,9 +109,12 @@ public class DLL {
             prev_Node.next.prev = new_node;
         }
         prev_Node.next = new_node;
+        if (prev_Node == tail)
+            tail = new_node;
     }
 
-    private void insertBefore(DListNode next_Node, int data) {
+    public void insertBefore(DListNode next_Node, int data) {
+        size++;
         DListNode new_node = new DListNode(data);
         if (next_Node == head) {
             head = new_node;
@@ -91,16 +128,26 @@ public class DLL {
 
     }
 
-    private void delete(DListNode del) {
+    public void delete(DListNode del) {
+        size--;
         if (del == null || head == null) return;
-        if (del == head) {
-            head = del.next;
-        }
         if (del.next != null) {
             del.next.prev = del.prev;
         }
         if (del.prev != null) {
             del.prev.next = del.next;
         }
+        if (del == head) {
+            head = del.next;
+        }
+        if (del == tail) {
+            tail = del.prev;
+        }
+        del.next = null;
+        del.prev = null;
+    }
+
+    public int size() {
+        return this.size;
     }
 }
