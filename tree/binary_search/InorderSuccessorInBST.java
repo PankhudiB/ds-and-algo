@@ -2,8 +2,6 @@ package tree.binary_search;
 
 import tree.Node;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Stack;
 
 class InorderSuccessorInBST {
