@@ -22,7 +22,7 @@ class InorderSuccessorInBST {
         node4.right = node5;
         node2.right = node3;
         InorderSuccessorInBST utility = new InorderSuccessorInBST();
-        System.out.println("kthSmallestElementInBST :" + utility.inorderSuccessorInBST(node4, node2));
+        System.out.println("inorderSuccessorInBST :" + utility.inorderSuccessorInBST(node4, node2));
 
         Node nodee1 = new Node(1);
         Node nodee2 = new Node(2);
@@ -49,6 +49,12 @@ class InorderSuccessorInBST {
     }
 
     public Node inorderSuccessorInBST(Node head, Node p) {
+        if (p.right != null) {
+            p = p.right;
+            while (p.left != null) p = p.left;
+            return p;
+        }
+
         boolean foundP = false;
         if (head == null)
             return null;
