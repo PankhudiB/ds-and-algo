@@ -35,12 +35,16 @@ public class Traversal {
         traversal.inOrderWithoutRecursion(node1);
         System.out.println();
 
-        System.out.println("Morris traversal");
-        traversal.morris(node1);
+        System.out.println("Inorder Morris traversal");
+        traversal.morrisInorder(node1);
         System.out.println();
 
         System.out.println("PreOrder");
         traversal.preOrder(node1);
+        System.out.println();
+
+        System.out.println("Preorder Morris traversal");
+        traversal.morrisPreorder(node1);
         System.out.println();
 
         System.out.println("PostOrder");
@@ -171,7 +175,7 @@ public class Traversal {
         }
     }
 
-    void morris(Node head) {
+    void morrisInorder(Node head) {
         Node curr = head;
         while (curr != null) {
             if (curr.left == null) {
@@ -188,6 +192,29 @@ public class Traversal {
                 } else {
                     predecessor.right = null;
                     System.out.print(curr.val + "=");
+                    curr = curr.right;
+                }
+            }
+        }
+    }
+
+    void morrisPreorder(Node head) {
+        Node curr = head;
+        while (curr != null) {
+            if (curr.left == null) {
+                System.out.print(curr.val + "=");
+                curr = curr.right;
+            } else {
+                Node predecessor = curr.left;
+                while (predecessor.right != curr && predecessor.right != null) {
+                    predecessor = predecessor.right;
+                }
+                if (predecessor.right == null) {
+                    predecessor.right = curr;
+                    System.out.print(curr.val + "=");
+                    curr = curr.left;
+                } else {
+                    predecessor.right = null;
                     curr = curr.right;
                 }
             }
