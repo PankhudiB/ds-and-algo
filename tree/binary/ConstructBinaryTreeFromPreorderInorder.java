@@ -59,8 +59,8 @@ class ConstructBinaryTreeFromPreorderInorder {
         if (inStart == inEnd) return node;
 
         int inIndex = valueToIndex.get(node.val);
-        node.left = treeFromPreorderInorder(preOrder, inOrder, inStart, inIndex - 1);
-        node.right = treeFromPreorderInorder(preOrder, inOrder, inIndex + 1, inEnd);
+        node.left = treeFromPreorderInorderUseHashMap(preOrder, inOrder, inStart, inIndex - 1);
+        node.right = treeFromPreorderInorderUseHashMap(preOrder, inOrder, inIndex + 1, inEnd);
         return node;
     }
 }
