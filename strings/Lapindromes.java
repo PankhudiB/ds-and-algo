@@ -4,15 +4,17 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 class Lapindromes {
+    static final int MAX_CHAR = 26;
+
     public static void main(String[] args) throws Exception {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int testCases = Integer.parseInt(reader.readLine());
         while (testCases-- > 0) {
             String str = reader.readLine();
             System.out.println(str + " -- " + isLapindrome(str));
+            System.out.println(str + " -- " + isLapindromeUsingArray(str));
         }
     }
 
@@ -41,6 +43,22 @@ class Lapindromes {
             }
         }
         return map;
+    }
+
+    private static boolean isLapindromeUsingArray(String str) {
+        int[] f1 = new int[MAX_CHAR];
+        int[] f2 = new int[MAX_CHAR];
+        int n = str.length();
+        if (n == 1)
+            return true;
+        for (int i = 0, j = n - 1; i < j; i++, j--) {
+            f1[str.charAt(i) - 'a']++;
+            f2[str.charAt(j) - 'a']++;
+        }
+        for (int i = 0; i < MAX_CHAR; i++) {
+            if (f1[i] != f2[i]) return false;
+        }
+        return true;
     }
 }
 
