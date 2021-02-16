@@ -15,6 +15,7 @@ class Lapindromes {
             String str = reader.readLine();
             System.out.println(str + " -- " + isLapindrome(str));
             System.out.println(str + " -- " + isLapindromeUsingArray(str));
+            System.out.println(str + " -- " + isLapindromeUsingArrayMemoryEfficient(str));
         }
     }
 
@@ -57,6 +58,21 @@ class Lapindromes {
         }
         for (int i = 0; i < MAX_CHAR; i++) {
             if (f1[i] != f2[i]) return false;
+        }
+        return true;
+    }
+
+    private static boolean isLapindromeUsingArrayMemoryEfficient(String str) {
+        int[] frequency1 = new int[MAX_CHAR];
+        int n = str.length();
+        if (n == 1)
+            return true;
+        for (int i = 0, j = n - 1; i < j; i++, j--) {
+            frequency1[str.charAt(i) - 'a']++;
+            frequency1[str.charAt(j) - 'a']--;
+        }
+        for (int i = 0; i < MAX_CHAR; i++) {
+            if (frequency1[i] != 0) return false;
         }
         return true;
     }
