@@ -2,6 +2,13 @@ package tree.binary;
 
 import tree.Node;
 
+class Height {
+    int height;
+    Height() {
+        this.height = 0;
+    }
+}
+
 class IsBalanced {
 
     public static void main(String[] args) {
@@ -9,6 +16,11 @@ class IsBalanced {
         System.out.println(l.isBalanced(l.getBinaryTreeVariant1()));
         System.out.println(l.isBalanced(l.getBinaryTreeVariant2()));
         System.out.println(l.isBalanced(l.getCompleteBinaryTree()));
+
+        Height height = new Height();
+        System.out.println(l.isBalanced(l.getBinaryTreeVariant1(), height));
+        System.out.println(l.isBalanced(l.getBinaryTreeVariant2(), height));
+        System.out.println(l.isBalanced(l.getCompleteBinaryTree(), height));
     }
 
     public boolean isBalanced(Node node) {
@@ -21,6 +33,23 @@ class IsBalanced {
     public int height(Node node) {
         if (node == null) return 0;
         return 1 + Math.max(height(node.left), height(node.right));
+    }
+
+    public boolean isBalanced(Node node, Height height) {
+        if (node == null) {
+            height.height = 0;
+            return true;
+        }
+        Height lheight = new Height();
+        Height rheight = new Height();
+        boolean l = isBalanced(node.left, lheight);
+        boolean r = isBalanced(node.right, rheight);
+        int lh = lheight.height;
+        int rh = rheight.height;
+
+        height.height = 1 + Math.max(lh, rh);
+        if (Math.abs(lh - rh) > 1) return false;
+        else return l && r;
     }
 
     private Node getBinaryTreeVariant1() {
@@ -87,5 +116,6 @@ class IsBalanced {
         node3.right = node7;
         return node1;
     }
+
 }
 
