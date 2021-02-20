@@ -7,6 +7,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 class LeftView {
+    static int maxSoFar;
+    static LinkedList<Node> leftViewForSoln2;
 
     public static void main(String[] args) {
         LeftView l = new LeftView();
@@ -16,6 +18,16 @@ class LeftView {
         System.out.println("---");
         LinkedList<Node> leftViewOfT2 = l.leftView(l.getCompleteBinaryTree());
         leftViewOfT2.forEach(System.out::println);
+        System.out.println("---");
+
+        //----------
+
+        LinkedList<Node> leftViewOfT3 = l.leftViewRecursive(l.getBinaryTreeVariant1());
+        leftViewOfT3.forEach(System.out::println);
+        System.out.println("---");
+        LinkedList<Node> leftViewOfT4 = l.leftViewRecursive(l.getCompleteBinaryTree());
+        leftViewOfT4.forEach(System.out::println);
+
     }
 
     public LinkedList<Node> leftView(Node root) {
@@ -35,6 +47,23 @@ class LeftView {
             q1 = temp;
         }
         return leftView;
+    }
+
+    public LinkedList<Node> leftViewRecursive(Node node) {
+        leftViewForSoln2 = new LinkedList<>();
+        maxSoFar = 0;
+        leftViewRecursive(node, 1);
+        return leftViewForSoln2;
+    }
+
+    private void leftViewRecursive(Node node, int level) {
+        if (node == null) return;
+        if (maxSoFar < level) {
+            leftViewForSoln2.add(node);
+            maxSoFar = level;
+        }
+        if (node.left != null) leftViewRecursive(node.left, level + 1);
+        if (node.right != null) leftViewRecursive(node.right, level + 1);
     }
 
     private Node getBinaryTreeVariant1() {
