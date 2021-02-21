@@ -8,13 +8,17 @@ class IsIdentical {
     public static void main(String[] args) {
         IsIdentical l = new IsIdentical();
 
-        System.out.println(l.isIdentical(Util.getBinaryTreeVariant1(), l.getBinaryTreeVariant2()));
+        System.out.println(l.isIdentical(Util.getBinaryTreeVariant1(), Util.getBinaryTreeVariant1()));
+        System.out.println(l.isIdentical(Util.getBinaryTreeVariant1(), getBinaryTreeVariant2()));
     }
 
-    public boolean isIdentical(Node n1, Node n2) {
-        if (n1 == null && n2 == null) return true;
-        else if (n1 == null || n2 == null) return false;
-        return (n1.val != n2.val) && isIdentical(n1.left, n2.left) && isIdentical(n1.right, n2.right);
+    public boolean isIdentical(Node a, Node b) {
+        if (a == null && b == null) return true;
+        if (a != null && b != null)
+            return (a.val == b.val
+                    && isIdentical(a.left, b.left)
+                    && isIdentical(a.right, b.right));
+        return false;
     }
 
     private static Node getBinaryTreeVariant2() {
