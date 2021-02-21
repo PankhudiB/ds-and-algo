@@ -13,17 +13,19 @@ class BottomView {
         BottomView l = new BottomView();
 
         System.out.println("Bottom view : ");
-        System.out.println(l.bottomView(Util.getBinaryTreeVariant1()).values());
+        System.out.println(l.bottomView(Util.getBinaryTreeVariant1()));
         System.out.println("---");
 
-        System.out.println(l.bottomView(Util.getCompleteBinaryTree()).values());
+        System.out.println(l.bottomView(Util.getCompleteBinaryTree()));
         System.out.println("---");
     }
 
-    public Map<Integer, Integer> bottomView(Node root) {
+    public ArrayList<Integer> bottomView(Node root) {
         bottomView = new TreeMap<>();
         horizontalDistance(root, 0);
-        return bottomView;
+        ArrayList<Integer> list = new ArrayList<>();
+        list.addAll(bottomView.values());
+        return list;
     }
 
     private void horizontalDistance(Node node, int horizontalDistance) {
