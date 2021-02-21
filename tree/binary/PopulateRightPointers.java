@@ -1,5 +1,7 @@
 package tree.binary;
 
+import tree.util.Util;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -23,6 +25,7 @@ class NodeR {
 class PopulateRightPointers {
     public static void main(String[] args) {
         PopulateRightPointers r = new PopulateRightPointers();
+
         NodeR treeWithRightNeighbourConnected = r.connect(getCompleteBinaryTree());
         NodeR treeWithRightNeighbourConnected2 = r.connectWithoutUsingQueue(getCompleteBinaryTree());
         r.levelOrderUsingQueue(treeWithRightNeighbourConnected);
