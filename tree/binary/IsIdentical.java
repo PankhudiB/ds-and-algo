@@ -2,9 +2,6 @@ package tree.binary;
 
 import tree.Node;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 class IsIdentical {
 
     public static void main(String[] args) {

@@ -2,8 +2,6 @@ package tree.binary;
 
 import tree.Node;
 
-import java.util.*;
-
 class MaximumPathSum {
     int maxPathSum;
 

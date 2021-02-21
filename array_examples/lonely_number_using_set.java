@@ -2,7 +2,6 @@ package array_examples;
 
 import java.util.*;
 import java.lang.*;
-import java.io.*;
 
 //time complexity - O(n)
 //space complexity - O(n)

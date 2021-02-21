@@ -4,7 +4,6 @@ import tree.Node;
 import tree.Traversal;
 
 import java.util.HashMap;
-import java.util.HashSet;
 
 
 class ConstructBinaryTreeFromPreorderInorder {

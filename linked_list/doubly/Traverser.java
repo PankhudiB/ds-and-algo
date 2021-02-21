@@ -1,6 +1,5 @@
 package linked_list.doubly;
 
-import tree.Node;
 import util.Tuple;
 
 public class Traverser {
