@@ -19,8 +19,8 @@ class VerticalTraversal {
         System.out.println("---");
     }
 
-    public List<Integer> verticalTraversal(Node root) {
-        List<Integer> output = new ArrayList();
+    public List<List<Integer>> verticalTraversal(Node root) {
+        List<List<Integer>> output = new ArrayList();
         nodeList = new ArrayList<>();
         if (root == null) return output;
 
@@ -42,9 +42,22 @@ class VerticalTraversal {
             }
         });
 
+        int currColIndex = this.nodeList.get(0).first;
+        List<Integer> currColumn = new ArrayList();
         for (Triplet<Integer, Integer, Integer> triplet : this.nodeList) {
-            output.add(triplet.third);
+            int col = triplet.first;
+            int val = triplet.third;
+
+            if (col == currColIndex) {
+                currColumn.add(val);
+            } else {
+                output.add(currColumn);
+                currColIndex = col;
+                currColumn = new ArrayList<>();
+                currColumn.add(val);
+            }
         }
+        output.add(currColumn);
         return output;
     }
 
