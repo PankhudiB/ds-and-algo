@@ -8,35 +8,26 @@ public class DeleteAdjacentPairInString {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String input = sc.next();
-        System.out.println(input + " ---> " + deleteAdjacentPairInString(input));
+        System.out.println(input + " ---> " + deleteAdjacentPairInStringUsing1Stack(input));
     }
 
-    private static String deleteAdjacentPairInString(String input) {
+    private static String deleteAdjacentPairInStringUsing1Stack(String input) {
         if (input.length() <= 1) return input;
-        Stack<Character> stack1 = new Stack<>();
-        Stack<Character> stack2 = new Stack<>();
+        Stack<Character> stack = new Stack<>();
         String output = "";
-        for (Character c : input.toCharArray()) {
-            stack1.push(c);
-        }
-        Character first;
-        Character second;
-        while (!stack1.isEmpty()) {
-            if (stack2.isEmpty()) {
-                first = stack1.pop();
-                second = stack1.pop();
+        int i = 0;
+        while (i < input.length()) {
+            if (stack.isEmpty() || input.charAt(i) != stack.peek()) {
+                stack.push(input.charAt(i));
+                i++;
             } else {
-                first = stack2.pop();
-                second = stack1.pop();
-            }
-            if (first != second) {
-                stack2.push(first);
-                stack2.push(second);
+                stack.pop();
+                i++;
             }
         }
-
-        while (!stack2.isEmpty()) {
-            output += stack2.pop();
+        while (!stack.isEmpty()) {
+            output = stack.peek() + output;
+            stack.pop();
         }
         return output;
     }
