@@ -12,7 +12,7 @@ public class DeleteAdjacentPairInString {
     }
 
     private static String deleteAdjacentPairInStringUsing1Stack(String input) {
-        if (input.length() <= 1) return input;
+        if (input.length() <= 1) return "Empty String";
         Stack<Character> stack = new Stack<>();
         String output = "";
         int i = 0;
@@ -29,6 +29,6 @@ public class DeleteAdjacentPairInString {
             output = stack.peek() + output;
             stack.pop();
         }
-        return output;
+        return output.equals("") ? "Empty String" : output;
     }
 }
