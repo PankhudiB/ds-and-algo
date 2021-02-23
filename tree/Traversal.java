@@ -128,7 +128,7 @@ public class Traversal {
         }
     }
 
-    private int depth(Node head) {
+    public int depth(Node head) {
         if (head == null) {
             return 0;
         }
