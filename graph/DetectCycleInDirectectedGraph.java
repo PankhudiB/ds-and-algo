@@ -3,11 +3,11 @@ package graph;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class DetectCycle {
+public class DetectCycleInDirectectedGraph {
     private int v;
     private ArrayList<Integer> adj[];
 
-    public DetectCycle(int v) {
+    public DetectCycleInDirectectedGraph(int v) {
         this.v = v;
         adj = new ArrayList[v];
         for (int i = 0; i < v; i++) {
@@ -25,7 +25,7 @@ public class DetectCycle {
         //                    ---   5
 
 
-        DetectCycle graph = new DetectCycle(6);
+        DetectCycleInDirectectedGraph graph = new DetectCycleInDirectectedGraph(6);
         graph.addEdge(0, 1);
         graph.addEdge(0, 2);
         graph.addEdge(2, 3);
@@ -36,7 +36,7 @@ public class DetectCycle {
         System.out.println("DFS");
         System.out.println("isCyclic : " + graph.isCyclic(0));
 
-        DetectCycle graph2 = new DetectCycle(5);
+        DetectCycleInDirectectedGraph graph2 = new DetectCycleInDirectectedGraph(5);
         graph2.addEdge(0, 1);
         graph2.addEdge(0, 2);
         graph2.addEdge(2, 3);
