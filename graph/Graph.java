@@ -2,6 +2,8 @@ package graph;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Graph {
     private int v;
@@ -24,7 +26,10 @@ public class Graph {
         g.addEdge(2, 3);
         g.addEdge(3, 3);
 
+        System.out.println("DFS");
         g.DFS(2);
+        System.out.println("\nBFS");
+        g.BFS(2);
     }
 
     private void DFS(int startNode) {
@@ -46,5 +51,25 @@ public class Graph {
 
     private void addEdge(int u, int v) {
         this.adj[u].add(v);
+    }
+
+    private void BFS(int startNode) {
+        boolean[] visited = new boolean[this.v];
+        Queue<Integer> queue = new LinkedList<>();
+        visited[startNode] = true;
+        queue.add(startNode);
+        while (!queue.isEmpty()) {
+            Integer node = queue.poll();
+            System.out.print(node + " ");
+
+            Iterator<Integer> itr = adj[node].iterator();
+            while (itr.hasNext()) {
+                Integer neighbour = itr.next();
+                if (!visited[neighbour]) {
+                    visited[neighbour] = true;
+                    queue.add(neighbour);
+                }
+            }
+        }
     }
 }
