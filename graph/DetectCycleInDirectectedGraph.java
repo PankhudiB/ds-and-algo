@@ -43,6 +43,19 @@ public class DetectCycleInDirectectedGraph {
         graph2.addEdge(2, 4);
 
         System.out.println("isCyclic : " + graph2.isCyclic(2));
+
+        DetectCycleInDirectectedGraph graph3 = new DetectCycleInDirectectedGraph(3);
+        graph3.addEdge(0, 1);
+        graph3.addEdge(0, 2);
+        graph3.addEdge(2, 2);
+
+        System.out.println("isCyclic : " + graph3.isCyclic(0));
+
+        DetectCycleInDirectectedGraph graph4 = new DetectCycleInDirectectedGraph(2);
+        graph4.addEdge(0, 1);
+        graph4.addEdge(1, 0);
+
+        System.out.println("isCyclic : " + graph4.isCyclic(0));
     }
 
     private boolean isCyclic(int startNode) {
