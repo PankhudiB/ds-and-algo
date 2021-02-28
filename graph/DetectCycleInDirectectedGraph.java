@@ -60,21 +60,29 @@ public class DetectCycleInDirectectedGraph {
 
     private boolean isCyclic(int startNode) {
         boolean[] visited = new boolean[this.v];
-        return DFSUtil(startNode, visited);
+        boolean[] recStack = new boolean[this.v];
+        for (int i = 0; i < v; i++) {
+            if (isCyclicUtil(startNode, visited, recStack))
+                return true;
+        }
+        return false;
     }
 
-    private boolean DFSUtil(int curr, boolean[] visited) {
+    private boolean isCyclicUtil(int curr, boolean[] visited, boolean[] recStack) {
+        if (recStack[curr]) return true;
+        if (visited[curr]) return false;
+
         visited[curr] = true;
-        System.out.print(curr + " ");
+        recStack[curr] = true;
+
         Iterator<Integer> itr = adj[curr].iterator();
         while (itr.hasNext()) {
             Integer adjacentNode = itr.next();
-            if (visited[adjacentNode]) return true;
-            if (!visited[adjacentNode]) {
-                boolean isCyclic = DFSUtil(adjacentNode, visited);
-                if (isCyclic) return true;
-            }
+            if (isCyclicUtil(adjacentNode, visited, recStack))
+                return true;
+
         }
+        recStack[curr] = false;
         return false;
     }
 
