@@ -8,4 +8,12 @@ public class Tuple<First, Second> {
         this.first = first;
         this.second = second;
     }
+
+    public First getKey() {
+        return first;
+    }
+
+    public Second getValue() {
+        return second;
+    }
 }
