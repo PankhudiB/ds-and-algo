@@ -29,6 +29,21 @@ public class WordLadder {
         System.out.println("Ladder Length : " + g.ladderLength("hit", "cog", wordList2));
         System.out.println("Ladder Length : " + g.ladderLengthEfficient("hit", "cog", wordList2));
 
+        ArrayList<String> wordList3 = new ArrayList();
+        wordList3.add("ymann");
+        wordList3.add("yycrj");
+        wordList3.add("oecij");
+        wordList3.add("ymcnj");
+        wordList3.add("yzcrj");
+        wordList3.add("yycij");
+        wordList3.add("xecij");
+        wordList3.add("yecij");
+        wordList3.add("ymanj");
+        wordList3.add("yzcnj");
+        wordList3.add("ymain");
+        System.out.println("Ladder Length : " + g.ladderLength("ymain", "oecij", wordList3));
+        System.out.println("Ladder Length : " + g.ladderLengthEfficient("ymain", "oecij", wordList3));
+
     }
 
     //one-directional BFS
@@ -82,9 +97,9 @@ public class WordLadder {
                         newBeginSet.add(neigh);
                     }
                 }
-                beginSet = newBeginSet;
-                level++;
             }
+            beginSet = newBeginSet;
+            level++;
         }
         return 0;
     }
@@ -94,7 +109,7 @@ public class WordLadder {
         List<String> allPossibleNeighbours = new ArrayList<>();
         for (int j = 0; j < curr_chars.length; j++) {          //"hit" > h , i , t
             char original_char = curr_chars[j];
-            for (char c = 'a'; c < 'z'; c++) {                  // for given position in [h]it --> try all a to z
+            for (char c = 'a'; c <= 'z'; c++) {                  // for given position in [h]it --> try all a to z
                 if (c == original_char) continue;
                 curr_chars[j] = c;
                 String newWord = new String(curr_chars);
