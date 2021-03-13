@@ -18,11 +18,22 @@ public class WordLadder {
         wordList.add("log");
         wordList.add("cog");
         System.out.println("Ladder Length : " + g.ladderLength("hit", "cog", wordList));
+        System.out.println("Ladder Length : " + g.ladderLengthEfficient("hit", "cog", wordList));
+
+        ArrayList<String> wordList2 = new ArrayList();
+        wordList2.add("hot");
+        wordList2.add("dot");
+        wordList2.add("dog");
+        wordList2.add("lot");
+        wordList2.add("log");
+        System.out.println("Ladder Length : " + g.ladderLength("hit", "cog", wordList2));
+        System.out.println("Ladder Length : " + g.ladderLengthEfficient("hit", "cog", wordList2));
+
     }
 
+    //one-directional BFS
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
         Set<String> wordSet = new HashSet<>(wordList);
-
         if (!wordSet.contains(endWord)) return 0;
 
         Queue<String> queue = new LinkedList<>();
@@ -42,6 +53,38 @@ public class WordLadder {
                 }
             }
             level++;
+        }
+        return 0;
+    }
+
+    private int ladderLengthEfficient(String beginWord, String endWord, List<String> wordList) {
+        Set<String> wordSet = new HashSet<>(wordList);
+        if (!wordSet.contains(endWord)) return 0;
+        Set<String> beginSet = new HashSet<>();
+        Set<String> endSet = new HashSet<>();
+        beginSet.add(beginWord);
+        endSet.add(endWord);
+        int level = 1;
+        while (!beginSet.isEmpty() && !endSet.isEmpty()) {
+            if (beginSet.size() > endSet.size()) {      //By doing this search space reduces
+                Set<String> temp;
+                temp = beginSet;
+                beginSet = endSet;
+                endSet = temp;
+            }
+            Set<String> newBeginSet = new HashSet<>();
+            for (String word : beginSet) {
+                List<String> neighbours = neighbours(word);
+                for (String neigh : neighbours) {
+                    if (endSet.contains(neigh)) return level + 1;
+                    if (wordSet.contains(neigh)) {
+                        wordSet.remove(neigh);
+                        newBeginSet.add(neigh);
+                    }
+                }
+                beginSet = newBeginSet;
+                level++;
+            }
         }
         return 0;
     }
