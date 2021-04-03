@@ -77,6 +77,33 @@ public class GraphColoring {
         return result;
     }
 
+    private int[] paintEfficient(int src) {
+        int[] result = new int[noOfVertices];
+        boolean[] available = new boolean[noOfVertices];
+        int currColor = 1;
+        for (int i = 0; i < noOfVertices; i++) {
+            result[i] = -1;
+            available[i] = true;
+        }
+        result[src] = currColor;
+        for (int curr = 1; curr < noOfVertices; curr++) {
+            Iterator<Integer> itr = adj.get(curr).iterator();
+            while (itr.hasNext()) {
+                Integer neighbour = itr.next();
+                if (result[neighbour] != -1) {
+                    available[result[neighbour]] = false;
+                }
+            }
+            int firstAvailableClr;
+            for (firstAvailableClr = 0; firstAvailableClr < noOfVertices; firstAvailableClr++) {
+                if (available[firstAvailableClr]) break;
+            }
+            result[curr] = firstAvailableClr;
+            Arrays.fill(available, true);
+        }
+        return result;
+    }
+
     private void addEdge(int u, int v) {
         adj.get(u).add(v);
         adj.get(v).add(u);
