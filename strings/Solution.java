@@ -3,46 +3,35 @@ package strings;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.StringTokenizer;
 
-public class GoogleIO_2020_1 {
+class Solution {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         FastReader sc = new FastReader();
-        PrintWriter pr = new PrintWriter(System.out);
         int t = sc.nextInt();
-
-        while (t-- > 0) {
-            int ICount = 0;
-            int iCount = 0;
-            int IOCount = 0;
-
-            String input = sc.next();
-
-            for (Character c : input.toCharArray()) {
-                if (c == 'I') ICount++;
-                if (c == 'i') iCount++;
-                if (c == 'O') {
-                    if (ICount > 0) {
-                        ICount--;
-                        IOCount++;
-                    } else {
-                        iCount--;
-                    }
-                }
-                if (c == 'o') {
-                    if (iCount > 0) {
-                        iCount--;
-                    } else {
-                        ICount--;
-                    }
-                }
+        int i = 1;
+        while (i <= t) {
+            int result = 1;
+            int curr = 1;
+            int noOfPets = sc.nextInt();
+            List<Integer> pets = new ArrayList(noOfPets);
+            while (noOfPets-- > 0) {
+                pets.add(sc.nextInt());
             }
+            Collections.sort(pets);
 
-            pr.println(IOCount);
-            pr.flush();
+            for (int j = 1; j < pets.size(); j++) {
+                if (pets.get(j) - pets.get(j - 1) != 0) {
+                    curr++;
+                }
+                result += curr;
+            }
+            System.out.println("Case #" + i + ": " + result);
+            i++;
         }
     }
 
