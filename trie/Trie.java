@@ -32,10 +32,22 @@ public class Trie {
             trie.insert(key);
         }
 
-        System.out.println(trie.search("the"));
-        System.out.println(trie.search("these"));
-        System.out.println(trie.search("their"));
-        System.out.println(trie.search("thaw"));
+        System.out.println("Found the : " + trie.search("the"));
+        System.out.println("Found these : " + trie.search("these"));
+        System.out.println("Found their : " + trie.search("their"));
+        System.out.println("Found thaw : " + trie.search("thaw"));
+        trie.delete("the");
+        System.out.println("Found the : " + trie.search("the"));
+
+    }
+
+    private void delete(String key) {
+        TrieNode crawler = root;
+        for (int level = 0; level < key.length(); level++) {
+            int index = key.charAt(level) - 'a';
+            crawler = crawler.children[index];
+        }
+        crawler.isEndOfWord = false;
     }
 
     private boolean search(String key) {
@@ -62,4 +74,5 @@ public class Trie {
         }
         crawler.isEndOfWord = true;
     }
+
 }
