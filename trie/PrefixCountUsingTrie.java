@@ -1,17 +1,19 @@
 package trie;
 
-public class Trie {
+public class PrefixCountUsingTrie {
     private static final int ALPHABET_SIZE = 26;
 
-    public Trie() {
+    public PrefixCountUsingTrie() {
         root = new TrieNode();
     }
 
     static class TrieNode {
         TrieNode[] children = new TrieNode[ALPHABET_SIZE];
+        int prefixCount;
         boolean isEndOfWord;
 
         public TrieNode() {
+            prefixCount = 0;
             isEndOfWord = false;
             for (int i = 0; i < ALPHABET_SIZE; i++) {
                 children[i] = null;
@@ -22,42 +24,32 @@ public class Trie {
     static TrieNode root;
 
     public static void main(String[] args) {
-        Trie trie = new Trie();
-        System.out.println(trie.search("searchingWhenDictionaryEmpty"));
-
-        String keys[] = {"the", "a", "there", "answer", "any",
-                "by", "bye", "their"};
+        PrefixCountUsingTrie trie = new PrefixCountUsingTrie();
+        String keys[] = {
+                "aa",
+                "aab",
+                "aabc",
+                "acb",
+        };
 
         for (String key : keys) {
             trie.insert(key);
         }
 
-        System.out.println("Found the : " + trie.search("the"));
-        System.out.println("Found these : " + trie.search("these"));
-        System.out.println("Found their : " + trie.search("their"));
-        System.out.println("Found thaw : " + trie.search("thaw"));
-        trie.delete("the");
-        System.out.println("Found the : " + trie.search("the"));
+        System.out.println("Prefix count : aa : " + trie.prefixCount("aa"));
+        System.out.println("Prefix count : aab : " + trie.prefixCount("aab"));
+        System.out.println("Prefix count : ak : " + trie.prefixCount("ak"));
     }
 
-    private void delete(String key) {
+    private int prefixCount(String key) {
         TrieNode crawler = root;
-        for (int level = 0; level < key.length(); level++) {
-            int index = key.charAt(level) - 'a';
-            crawler = crawler.children[index];
-        }
-        crawler.isEndOfWord = false;
-    }
 
-    private boolean search(String key) {
-        TrieNode crawler = root;
         for (int level = 0; level < key.length(); level++) {
             int index = key.charAt(level) - 'a';
-            if (crawler.children[index] == null)
-                return false;
+            if (crawler.children[index] == null || crawler.children[index].prefixCount == 0) return 0;
             crawler = crawler.children[index];
         }
-        return crawler != null && crawler.isEndOfWord;
+        return crawler.prefixCount;
     }
 
     private void insert(String key) {
@@ -69,11 +61,10 @@ public class Trie {
             if (crawler.children[index] == null) {
                 crawler.children[index] = new TrieNode();
             }
+            crawler.prefixCount++;
             crawler = crawler.children[index];
         }
         crawler.isEndOfWord = true;
+        crawler.prefixCount++;
     }
-
-
-
 }
