@@ -40,4 +40,18 @@ public class MaximumRectangularAreaInHistogram_Bruteforce {
         }
         return maxArea;
     }
+
+    private static long maxAreaInHistogram_BetterBruteforce(int[] histogram) {
+        long maxArea = 0;
+        for (int i = 0; i < histogram.length; i++) {
+            long minHeight = Integer.MAX_VALUE;
+            for (int j = i; j < histogram.length; j++) {
+                minHeight = Math.min(minHeight, histogram[j]);
+                maxArea = Math.max(maxArea, minHeight * (j - i + 1));
+            }
+        }
+        return maxArea;
+    }
+
+
 }
