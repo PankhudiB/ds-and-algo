@@ -4,8 +4,10 @@ import java.util.Scanner;
 
 class IsMountain {
     public static void main(String[] args) throws Exception {
-        int arr[] = new int[]{0,1,2,4,3,1};
-        System.out.println(validMountainArray(arr));
+        System.out.println(validMountainArray(new int[]{0,1,2,4,3,1}));
+        System.out.println(validMountainArray(new int[]{4,3,1}));
+        System.out.println(validMountainArray(new int[]{0,1,2,4}));
+        System.out.println(validMountainArray(new int[]{2,0,2}));
     }
 
     public static boolean validMountainArray(int[] arr) {
