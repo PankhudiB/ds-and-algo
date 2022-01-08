@@ -11,7 +11,7 @@ class ReplaceElements_GreatestElementonRightSide {
         ArrayUtil.print(replaceElements(new int[]{4, 3, 2, 1}));
     }
 
-    public static int[] replaceElements(int[] arr) {
+    public static int[] replaceElements_withStack(int[] arr) {
         Stack<Integer> s = new Stack<>();
         s.push(-1);
         for (int i = arr.length - 1; i > 0; i--) {
@@ -24,6 +24,18 @@ class ReplaceElements_GreatestElementonRightSide {
         }
         for (int i = 0; i < arr.length; i++) {
             arr[i] = s.pop();
+        }
+        return arr;
+    }
+
+    public static int[] replaceElements(int[] arr) {
+        int max = -1;
+        for (int i = arr.length - 1; i >= 0; i--) {
+            int temp = arr[i];
+            arr[i] = max;
+            if (temp > max) {
+                max = temp;
+            }
         }
         return arr;
     }
