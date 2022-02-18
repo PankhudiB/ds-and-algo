@@ -1,8 +1,6 @@
 package tree;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 public class Traversal {
     public static void main(String[] args) {
@@ -81,7 +79,7 @@ public class Traversal {
         Node curr = head;
 
         while (curr != null || stack.size() > 0) {
-            while (curr != null) {
+            while (curr != null)  {
                 stack.push(curr);
                 curr = curr.left;
             }
@@ -98,6 +96,19 @@ public class Traversal {
         System.out.print(head.val + "=");
         preOrder(head.left);
         preOrder(head.right);
+    }
+
+    void preOrderWithoutRecursion(Node head) {
+        Stack<Node> stack = new Stack<>();
+        List<Integer> l = new ArrayList<>();
+        if (head != null )stack.add(head);
+
+        while(!stack.isEmpty()) {
+            Node curr = stack.pop();
+            System.out.println(curr.val + " ");
+            if( curr.right != null ) stack.push(curr.right);
+            if( curr.left != null ) stack.push(curr.left);
+        }
     }
 
     public void postOrder(Node head) {
