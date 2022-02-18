@@ -41,6 +41,11 @@ public class Traversal {
         traversal.preOrder(node1);
         System.out.println();
 
+        System.out.println("PreOrder without Recur");
+        traversal.preOrderWithoutRecursion(node1);
+        System.out.println();
+
+
         System.out.println("Preorder Morris traversal");
         traversal.morrisPreorder(node1);
         System.out.println();
@@ -48,6 +53,11 @@ public class Traversal {
         System.out.println("PostOrder");
         traversal.postOrder(node1);
         System.out.println();
+
+        System.out.println("PostOrder without recursion");
+        traversal.postOrderWithoutRecursion(node1);
+        System.out.println();
+
 
         System.out.println("LevelOrder");
         traversal.levelOrderWithoutQueue(node1);
@@ -105,7 +115,7 @@ public class Traversal {
 
         while(!stack.isEmpty()) {
             Node curr = stack.pop();
-            System.out.println(curr.val + " ");
+            System.out.print(curr.val + " ");
             if( curr.right != null ) stack.push(curr.right);
             if( curr.left != null ) stack.push(curr.left);
         }
@@ -119,6 +129,24 @@ public class Traversal {
         postOrder(head.right);
         System.out.print(head.val + "=");
     }
+
+    public void postOrderWithoutRecursion(Node head) {
+        Stack<Node> s1 = new Stack<>();
+        Stack<Node> s2 = new Stack<>();
+        List<Integer> result = new ArrayList<>();
+        if (head != null) s1.add(head);
+
+        while(!s1.isEmpty()){
+            Node curr = s1.pop();
+            s2.push(curr);
+            if (curr.left != null ) s1.push(curr.left);
+            if (curr.right != null ) s1.push(curr.right);
+        }
+        while(!s2.isEmpty()){
+            System.out.print(s2.pop().val + " ");
+        }
+    }
+
 
     public void levelOrderWithoutQueue(Node head) {
         int depth = depth(head);
