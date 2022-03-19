@@ -39,13 +39,15 @@ public class UnionAndFind {
         int rootX = findWithPathCompression(x);
         int rootY = findWithPathCompression(y);
 
-        if (rank[x] > rank[y]) {
-            root[y] = rootX;
-        } else if (rank[y] > rank[x]) {
-            root[x] = rootY;
-        } else {
-            root[y] = rootX;
-            rank[y]++;
+        if (rootX != rootY) {
+            if (rank[x] > rank[y]) {
+                root[y] = rootX;
+            } else if (rank[y] > rank[x]) {
+                root[x] = rootY;
+            } else {
+                root[y] = rootX;
+                rank[y]++;
+            }
         }
     }
 
