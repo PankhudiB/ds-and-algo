@@ -1,11 +1,14 @@
 package disjoint_set;
 
 public class UnionAndFind {
+    int[] rank;
     int[] root;
 
     public void UnionAndFind(int n) {
+        rank = new int[n];
         root = new int[n];
         for (int i = 0; i < n; i++) {
+            rank[i] = 1;
             root[i] = i;
         }
     }
@@ -25,6 +28,25 @@ public class UnionAndFind {
             root[rootY] = rootX;
         }
 
+    }
+
+    public int findWithPathCompression(int x) {
+        if (x == root[x]) return x;
+        return root[x] = findWithPathCompression(root[x]);
+    }
+
+    public void unionWithRank(int x, int y) {
+        int rootX = findWithPathCompression(x);
+        int rootY = findWithPathCompression(y);
+
+        if (rank[x] > rank[y]) {
+            root[y] = rootX;
+        } else if (rank[y] > rank[x]) {
+            root[x] = rootY;
+        } else {
+            root[y] = rootX;
+            rank[y]++;
+        }
     }
 
     public boolean connected(int x, int y) {
