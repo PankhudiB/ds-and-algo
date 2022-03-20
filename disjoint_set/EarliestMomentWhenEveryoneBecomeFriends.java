@@ -65,3 +65,17 @@ public class EarliestMomentWhenEveryoneBecomeFriends {
         }
     }
 }
+
+/*
+    N - no of People
+    M - no of logs
+    
+    TC -> O(N + MlogM + Mα(N))
+       - init of root[]
+       - sort
+       - union find
+
+    SC -> O(N + logM)
+        - union find
+        - sort -> java -> Arrays.sort() - uses quick sort -> hence logM
+ */
