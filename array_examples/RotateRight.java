@@ -23,19 +23,31 @@ class RotateRight {
     }
 
     public static int[] rotate(int[] nums, int k) {
-            k %=nums.length;
-            int temp, previous;
-            int n=nums.length;
-            for(int i=0; i<k; i++){
-                previous = nums[n-1];
-                for(int j=0; j<n; j++){
-                    temp= nums[j];
-                    nums[j] = previous;
-                    previous = temp;
-                }
+        k %= nums.length;
+        int temp, previous;
+        int n = nums.length;
+        for (int i = 0; i < k; i++) {
+            previous = nums[n - 1];
+            for (int j = 0; j < n; j++) {
+                temp = nums[j];
+                nums[j] = previous;
+                previous = temp;
             }
-            return nums;
         }
+        return nums;
+    }
 
+    public static int[] rotateUsingExtraSpace(int[] nums, int k) {
+        int n = nums.length;
+        int[] temp = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            temp[(i + k) % n] = nums[i];
+        }
+        for (int i = 0; i < n; i++) {
+            nums[i] = temp[i];
+        }
+        return nums;
+    }
 }
 
