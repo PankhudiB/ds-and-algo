@@ -10,6 +10,9 @@ class IsPalindrome {
         System.out.println(listUtility.isPalindrome(helper.getListWithNum(new int[]{1, 2})) + "\n --------------------------------");
         System.out.println(listUtility.isPalindrome(helper.getListWithNum(new int[]{1, 2, 3, 2, 1})) + "\n --------------------------------");
         System.out.println(listUtility.isPalindrome(helper.getListWithNum(new int[]{0, 0})) + "\n --------------------------------");
+
+        System.out.println(listUtility.isPalindromeWithRecursion(helper.getListWithNum(new int[]{1, 2})) + "\n --------------------------------");
+        System.out.println(listUtility.isPalindromeWithRecursion(helper.getListWithNum(new int[]{1, 2, 3, 2, 1})) + "\n --------------------------------");
     }
 
     boolean isPalindrome(ListNode head) {
@@ -38,5 +41,21 @@ class IsPalindrome {
             fast = fast.next.next;
         }
         return slow;
+    }
+
+    ListNode headPtr;
+
+    public boolean isPalindromeWithRecursion(ListNode head) {
+        headPtr = head;
+        return check(head);
+    }
+
+    private boolean check(ListNode curr) {
+        if (curr != null) {
+            if (!check(curr.next)) return false;
+            if (curr.val != headPtr.val) return false;
+            headPtr = headPtr.next;
+        }
+        return true;
     }
 }
