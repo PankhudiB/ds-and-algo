@@ -17,9 +17,12 @@ public class ReverseLinkedList {
         l4.next = l5;
 
         ReverseLinkedList r = new ReverseLinkedList();
-        ListNode swappedList = r.reverse(l1);
         LinkedListHelper h = new LinkedListHelper();
-        h.printList(swappedList);
+        h.printList(l1);
+        ListNode reversed = r.reverse(l1);
+        h.printList(reversed);
+        ListNode original = r.reverse(reversed);
+        h.printList(original);
     }
 
     public ListNode reverse(ListNode head) {
@@ -34,5 +37,18 @@ public class ReverseLinkedList {
         head.next = null;
 
         return p;
+    }
+
+    public ListNode reverseIterative(ListNode head) {
+        ListNode prev = null;
+        ListNode curr = head;
+
+        while (curr != null) {
+            ListNode nextTemp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextTemp;
+        }
+        return prev;
     }
 }
