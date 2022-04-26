@@ -35,4 +35,25 @@ public class SwapNodesInPair {
         head.next = helper(nextsNext);
         return next;
     }
+
+    public ListNode swapPairIterative(ListNode head) {
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        ListNode prevNode = dummy;
+
+        while (head != null && head.next != null) {
+
+            ListNode first = head;
+            ListNode second = head.next;
+
+            prevNode.next = second;
+            first.next = second.next;
+            second.next = first;
+
+            prevNode = first;
+            head = first.next;
+
+        }
+        return dummy.next;
+    }
 }
