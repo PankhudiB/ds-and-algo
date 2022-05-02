@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class AllPathsFromSourceToTarget {
+public class AllPathsFromSourceToTargetUsingBFS {
     int target;
     List<List<Integer>> allPossiblePaths;
     int[][] graph;
@@ -18,7 +18,7 @@ public class AllPathsFromSourceToTarget {
     //         ---> 4  <----- 3 <------- 2
 
     public static void main(String[] args) {
-        AllPathsFromSourceToTarget r = new AllPathsFromSourceToTarget();
+        AllPathsFromSourceToTargetUsingBFS r = new AllPathsFromSourceToTargetUsingBFS();
         int maze[][] = {{4, 3, 1}, {3, 2, 4}, {3}, {4}, {}};
         System.out.println(r.allPathsSourceTarget(maze));
 
