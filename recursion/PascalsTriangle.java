@@ -1,7 +1,5 @@
 package recursion;
 
-import linked_list.singly.LinkedListHelper;
-import linked_list.singly.ListNode;
 import util.ArrayUtil;
 
 import java.util.ArrayList;
@@ -11,28 +9,34 @@ import java.util.List;
 public class PascalsTriangle {
     public static void main(String[] args) {
         PascalsTriangle p = new PascalsTriangle();
-        List<Integer> pascalRow4 = p.generateRow(3);
-        ArrayUtil.print(pascalRow4);
-        List<Integer> pascalRow7 = p.generateRow(6);
-        ArrayUtil.print(pascalRow7);
+        List<List<Integer>> triangle1 = p.get(3);
+        System.out.println(triangle1);
+        List<List<Integer>> triangle2 = p.get(6);
+        System.out.println(triangle2);
+
     }
 
-    public List<Integer> generateRow(int rowIndex) {
-        List<Integer> ans = new ArrayList<>();
+    public List<List<Integer>> get(int size) {
+        List<List<Integer>> triangle = new ArrayList<>();
+        if (size == 0) return triangle;
+        List<Integer> firstRow = new ArrayList<>();
+        firstRow.add(1);
+        triangle.add(firstRow);
 
-        for (int i = 0; i <= rowIndex; i++) {
-            ans.add(getNum(rowIndex, i));
+        for (int i = 1; i < size; i++) {
+            List<Integer> prevRow = triangle.get(i - 1);
+            List<Integer> curr = new ArrayList<>();
+
+            curr.add(1);
+
+            for (int j = 1; j < i; j++) {
+                curr.add(prevRow.get(j - 1) + prevRow.get(j));
+            }
+
+            curr.add(1);
+            triangle.add(curr);
         }
 
-        return ans;
+        return triangle;
     }
-
-    private int getNum(int rowIndex, int colIndex) {
-        if (rowIndex == 0 || colIndex == 0 || rowIndex == colIndex) {
-            return 1;
-        }
-
-        return getNum(rowIndex - 1, colIndex - 1) + getNum(rowIndex - 1, colIndex);
-    }
-
 }
