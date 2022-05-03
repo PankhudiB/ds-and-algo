@@ -13,6 +13,12 @@ public class GetIthRowOfPascalsTriangle {
         ArrayUtil.print(pascalRow4);
         List<Integer> pascalRow7 = p.generateRow(6);
         ArrayUtil.print(pascalRow7);
+
+        List<Integer> pascalRow4e = p.generateRowEfficient(3);
+        ArrayUtil.print(pascalRow4e);
+        List<Integer> pascalRow7e = p.generateRowEfficient(6);
+        ArrayUtil.print(pascalRow7e);
+
     }
 
     public List<Integer> generateRow(int rowIndex) {
@@ -33,4 +39,21 @@ public class GetIthRowOfPascalsTriangle {
         return getNum(rowIndex - 1, colIndex - 1) + getNum(rowIndex - 1, colIndex);
     }
 
+    public List<Integer> generateRowEfficient(int rowIndex) {
+        List<Integer> curr = new ArrayList<>();
+        List<Integer> prev = new ArrayList<>();
+        prev.add(1);
+
+        for (int i = 1; i <= rowIndex; i++) {
+            curr = new ArrayList<>();
+            curr.add(1);
+
+            for (int j = 1; j < i; j++) {
+                curr.add(prev.get(j - 1) + prev.get(j));
+            }
+            curr.add(1);
+            prev = curr;
+        }
+        return prev;
+    }
 }
