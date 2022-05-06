@@ -21,6 +21,10 @@ public class Fibonacci {
         Integer fiboIterative6 = p.fiboIterativeRememberOnlyLast2InsteadOfCache(6);
         System.out.println(fiboIterative6);
 
+        Integer fiboUsingGoldenRatio5 = p.fiboUsingGoldenRatio(5);
+        System.out.println(fiboUsingGoldenRatio5);
+        Integer fiboUsingGoldenRatio6 = p.fiboUsingGoldenRatio(6);
+        System.out.println(fiboUsingGoldenRatio6);
     }
 
     public int fibo(int n) {
@@ -58,5 +62,10 @@ public class Fibonacci {
         }
 
         return curr;
+    }
+
+    public int fiboUsingGoldenRatio(int n) {
+        double goldenRatio = (1 + Math.sqrt(5)) / 2;
+        return (int) Math.round(Math.pow(goldenRatio, n) / Math.sqrt(5));
     }
 }
