@@ -16,6 +16,11 @@ public class Fibonacci {
         Integer fiboWithMemo6 = p.fiboWithMemo(6);
         System.out.println(fiboWithMemo6);
 
+        Integer fiboIterative5 = p.fiboIterativeRememberOnlyLast2InsteadOfCache(5);
+        System.out.println(fiboIterative5);
+        Integer fiboIterative6 = p.fiboIterativeRememberOnlyLast2InsteadOfCache(6);
+        System.out.println(fiboIterative6);
+
     }
 
     public int fibo(int n) {
@@ -37,5 +42,21 @@ public class Fibonacci {
         }
         cache.put(n, result);
         return result;
+    }
+
+    public Integer fiboIterativeRememberOnlyLast2InsteadOfCache(int n) {
+        if (n < 2) return n;
+
+        int prev1 = 1;
+        int prev2 = 0;
+        int curr = 0;
+
+        for (int i = 2; i <= n; i++) {
+            curr = prev1 + prev2;
+            prev2 = prev1;
+            prev1 = curr;
+        }
+
+        return curr;
     }
 }
