@@ -1,5 +1,7 @@
 package recursion;
 
+import java.util.HashMap;
+
 public class ClimbingStairs {
     public static void main(String[] args) {
         ClimbingStairs p = new ClimbingStairs();
@@ -7,6 +9,12 @@ public class ClimbingStairs {
         System.out.println(waysToClimb5);
         int waysToClimb6 = p.waysToClimb(6);
         System.out.println(waysToClimb6);
+
+        int waysToClimbWithMemo5 = p.waysToClimbWithMemo(5);
+        System.out.println(waysToClimbWithMemo5);
+        int waysToClimbWithMemo6 = p.waysToClimbWithMemo(6);
+        System.out.println(waysToClimbWithMemo6);
+
     }
 
     private int waysToClimb(int n) {
@@ -20,8 +28,27 @@ public class ClimbingStairs {
         if (i == n) {
             return 1;
         }
-        int i1 = climb_Stairs(i + 1, n);
-        int i2 = climb_Stairs(i + 2, n);
+        return climb_Stairs(i + 1, n) + climb_Stairs(i + 2, n);
+    }
+
+    private int waysToClimbWithMemo(int n) {
+        cache = new HashMap<>();
+        return climb_Stairs_memo(0, n);
+    }
+
+    HashMap<Integer, Integer> cache = new HashMap<>();
+
+    public int climb_Stairs_memo(int i, int n) {
+        if (i > n) {
+            return 0;
+        }
+        if (i == n) {
+            return 1;
+        }
+        if (cache.containsKey(i)) return cache.get(i);
+        int i1 = climb_Stairs_memo(i + 1, n);
+        int i2 = climb_Stairs_memo(i + 2, n);
+        cache.put(i, (i1 + i2));
         return i1 + i2;
     }
 }
