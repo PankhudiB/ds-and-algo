@@ -15,6 +15,10 @@ public class ClimbingStairs {
         int waysToClimbWithMemo6 = p.waysToClimbWithMemo(6);
         System.out.println(waysToClimbWithMemo6);
 
+        int climb_stairs_like_fibo5 = p.climb_stairs_like_fibo(5);
+        System.out.println(climb_stairs_like_fibo5);
+        int climb_stairs_like_fibo6 = p.climb_stairs_like_fibo(6);
+        System.out.println(climb_stairs_like_fibo6);
     }
 
     private int waysToClimb(int n) {
@@ -50,6 +54,22 @@ public class ClimbingStairs {
         int i2 = climb_Stairs_memo(i + 2, n);
         cache.put(i, (i1 + i2));
         return i1 + i2;
+    }
+
+    public int climb_stairs_like_fibo(int n) {
+        if (n <= 2) return n;
+
+        int prev1 = 1;
+        int prev2 = 2;
+        int curr = 0;
+
+        for (int i = 3; i <= n; i++) {
+            curr = prev1 + prev2;
+            prev1 = prev2;
+            prev2 = curr;
+        }
+
+        return curr;
     }
 }
 
