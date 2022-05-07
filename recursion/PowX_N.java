@@ -12,6 +12,11 @@ public class PowX_N {
         double pow2 = p.pow(2, 2);
         System.out.println(pow2);
 
+        double powRecursiveEfficient1 = p.powRecursiveEfficient(2, 10);
+        System.out.println(powRecursiveEfficient1);
+        double powRecursiveEfficient2 = p.powRecursiveEfficient(2, 2);
+        System.out.println(powRecursiveEfficient2);
+
     }
 
     private double pow(int x, int n) {
@@ -24,6 +29,25 @@ public class PowX_N {
             ans = ans * x;
         }
         return ans;
+    }
+
+    public double powRecursiveEfficient(int x, int n) {
+        if (n < 0) {
+            x = 1 / x;
+            n = -n;
+        }
+        return helper(x, n);
+    }
+
+    private double helper(int x, int n) {
+        if (n == 0) return 1.0;
+        double half = helper(x, n / 2);
+
+        if (n % 2 == 0) {
+            return half * half;
+        } else {
+            return half * half * x;
+        }
     }
 
 }
