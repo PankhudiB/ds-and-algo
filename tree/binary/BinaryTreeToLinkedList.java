@@ -44,5 +44,23 @@ class BinaryTreeToLinkedList {
         node.left = null;
         prev = node;
     }
+
+    public void toLLAnotherApproach(Node root) {
+        helper(root);
+    }
+
+    private Node helper(Node node) {
+        if (node == null) return null;
+        if (node.left == null && node.right == null) return node;
+
+        Node leftTail = helper(node.left);
+        Node rightTail = helper(node.right);
+        if (leftTail != null) {
+            leftTail.right = node.right;
+            node.right = node.left;
+            node.left = null;
+        }
+        return rightTail == null ? leftTail : rightTail;
+    }
 }
 
