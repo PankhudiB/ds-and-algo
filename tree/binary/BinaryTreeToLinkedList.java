@@ -27,6 +27,8 @@ class BinaryTreeToLinkedList {
         Node result2 = l.toLL(tree2);
         t.inOrder(result2);
         System.out.println("----------");
+
+
     }
 
     public Node toLL(Node root) {
@@ -61,6 +63,24 @@ class BinaryTreeToLinkedList {
             node.left = null;
         }
         return rightTail == null ? leftTail : rightTail;
+    }
+
+    public void toLLUsingMorrisTraversal(Node node) {
+        if (node == null) {
+            return;
+        }
+        while (node != null) {
+            Node rightmost = node.left;
+            if (node.left != null) {
+                while (rightmost.right != null) {
+                    rightmost = rightmost.right;
+                }
+                rightmost.right = node.right;
+                node.right = node.left;
+                node.left = null;
+            }
+            node = node.right;
+        }
     }
 }
 
