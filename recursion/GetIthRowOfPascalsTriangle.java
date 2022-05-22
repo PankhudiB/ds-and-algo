@@ -72,9 +72,13 @@ public class GetIthRowOfPascalsTriangle {
         for (int i = 0; i < rowIndex; i++) {
             for (int j = i; j > 0; j--) {
                 row.set(j, row.get(j) + row.get(j - 1));
+                System.out.println("i: " + i + ", j:" + j + " -- " + row);
             }
             row.add(1);
+            System.out.println("i : " + i + ": " + row);
         }
         return row;
     }
 }
+
+
