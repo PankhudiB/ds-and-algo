@@ -2,13 +2,13 @@ package binary_search;
 
 public class FindMinInRotatedArray {
     public static void main(String[] args) {
-        System.out.println("min: " + findPeakElement(new int[]{3, 4, 5, 1, 2}));
-        System.out.println("min: " + findPeakElement(new int[]{2, 4, 5, 6, 7, 0, 1}));
-        System.out.println("min: " + findPeakElement(new int[]{11, 13, 15, 17}));
-        System.out.println("min: " + findPeakElement(new int[]{5, 1, 2, 3, 4}));
+        System.out.println("min: " + findMinElement(new int[]{3, 4, 5, 1, 2}));
+        System.out.println("min: " + findMinElement(new int[]{2, 4, 5, 6, 7, 0, 1}));
+        System.out.println("min: " + findMinElement(new int[]{11, 13, 15, 17}));
+        System.out.println("min: " + findMinElement(new int[]{5, 1, 2, 3, 4}));
     }
 
-    public static int findPeakElement(int[] nums) {
+    public static int findMinElement(int[] nums) {
         int left = 0, right = nums.length - 1;
         int itr = 0;
         if (nums[right] > nums[0]) {
