@@ -47,6 +47,11 @@ public class MinCostToConnectAllPoints {
     /*
         Solved using Kruskal -> 1. sort edges & 2. add the edge to mst if it doesnt form cycle
                                     -> to do 2. -> use Union Find DS
+        TC ->  1. finding manhattan dist -> N^2 +
+               2. sorting them -> N^2 * log(N^2) +
+               3. for each edge -> doing union find --> N^2 * α(N)
+
+               -> hence : N^2 * log(N^2)
      */
     class Solution {
         public int minCostConnectPoints(int[][] points) {
