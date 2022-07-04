@@ -2,7 +2,7 @@ package graph;
 
 import java.util.ArrayList;
 
-public class MinCostToConnectAllPoints {
+public class Kruskal_MinCostToConnectAllPoints {
     class UnionFind {
         private int[] rank;
         private int[] root;
