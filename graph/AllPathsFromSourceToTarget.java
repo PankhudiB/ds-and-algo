@@ -19,7 +19,7 @@ public class AllPathsFromSourceToTarget {
 
     public static void main(String[] args) {
         AllPathsFromSourceToTarget r = new AllPathsFromSourceToTarget();
-        int maze[][] = {{4, 3, 1}, {3, 2, 4}, {3}, {4}, {}};
+        int maze[][] = {{4, 3, 1}, {3, 2, 4}, {3}, {0, 4}, {}};
         System.out.println(r.allPathsSourceTarget(maze));
 
         int maze2[][] = {{1}, {}};
@@ -44,9 +44,11 @@ public class AllPathsFromSourceToTarget {
         }
 
         for (Integer nextNode : graph[curr]) {
-            pathSoFar.addLast(nextNode);
-            backtrack(nextNode, pathSoFar);
-            pathSoFar.removeLast();
+            if (!pathSoFar.contains(nextNode)) {
+                pathSoFar.addLast(nextNode);
+                backtrack(nextNode, pathSoFar);
+                pathSoFar.removeLast();
+            }
         }
     }
 
