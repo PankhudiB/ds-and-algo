@@ -1,9 +1,6 @@
 package stack;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 // Definition for a Node.
 class Node {
@@ -69,7 +66,7 @@ class Node {
 }
 */
 
-    class SolvedAgain {
+    class SolvedAgainUsingDFS {
         Map<Node, Node> visited = new HashMap<>();
 
         public Node cloneGraph(Node node) {
@@ -86,9 +83,33 @@ class Node {
                 newNode.neighbors.add(cloneGraph(neigh));
             }
 
-
             return newNode;
         }
+    }
 
+    class SolvedAgainUsingBFS {
+        Map<Node, Node> visited = new HashMap<>();
+
+        public Node cloneGraph(Node node) {
+            if (node == null) return null;
+            Queue<Node> queue = new LinkedList<>();
+
+            queue.add(node);
+            visited.put(node, new Node(node.val));
+
+            while (!queue.isEmpty()) {
+                Node currNode = queue.remove();
+
+                for (Node neigh : currNode.neighbors) {
+                    if (!visited.containsKey(neigh)) {
+                        visited.put(neigh, new Node(neigh.val));
+                        queue.add(neigh);
+                    }
+                    visited.get(currNode).neighbors.add(visited.get(neigh));
+                }
+            }
+
+            return visited.get(node);
+        }
     }
 }
