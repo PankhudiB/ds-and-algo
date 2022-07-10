@@ -1,4 +1,4 @@
-package graph;
+package graph.algos;
 
 import java.util.ArrayList;
 

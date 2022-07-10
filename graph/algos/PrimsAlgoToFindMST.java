@@ -1,4 +1,4 @@
-package graph;
+package graph.algos;
 
 public class PrimsAlgoToFindMST {
     private static final int NO_PARENT = -1;
