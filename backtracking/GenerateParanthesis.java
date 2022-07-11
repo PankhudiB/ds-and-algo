@@ -24,7 +24,7 @@ public class GenerateParanthesis {
 
     private static void backtrack(String stringSoFar) {
         if (stringSoFar.length() > targetSequenceLength) return;
-        if (stringSoFar.length() == targetSequenceLength && validParenthesisSequence(stringSoFar)) {
+        if (stringSoFar.length() == targetSequenceLength && validParenthesisSequenceEfficient(stringSoFar)) {
             result.add(stringSoFar);
             return;
         }
@@ -46,6 +46,16 @@ public class GenerateParanthesis {
             }
         }
         return (stack.isEmpty()) ? true : false;
+    }
+
+    private static boolean validParenthesisSequenceEfficient(String sequence) {
+        int balance = 0;
+        for (Character ch : sequence.toCharArray()) {
+            if (ch == '(') balance++;
+            else balance--;
+            if (balance < 0) return false;
+        }
+        return (balance == 0);
     }
 }
 
