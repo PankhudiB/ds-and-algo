@@ -1,4 +1,4 @@
-package graph.algos;
+package basic_algo_template;
 
 import java.util.ArrayList;
 import java.util.List;
