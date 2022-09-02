@@ -1,7 +1,5 @@
 package tree.binary;
 
-import tree.Node;
-
 class TreeNode {
     int val;
     TreeNode left;
@@ -20,7 +18,6 @@ class TreeNode {
         this.right = right;
     }
 }
-
 
 class SumOfLeftLeaves {
     public static void main(String[] args) {
@@ -52,11 +49,14 @@ class SumOfLeftLeaves {
         node4_.right = node1;
 
         SumOfLeftLeaves c = new SumOfLeftLeaves();
-        System.out.println("hasPathSum :" + c.sumOfLeftLeaves(node5));
+        System.out.println("sumOfLeftLeaves :" + c.sumOfLeftLeaves(node5));
+
+        System.out.println("sumOfLeftLeavesMorris :" + c.sumOfLeftLeavesMorris(node5));
     }
 
     int sum = 0;
 
+    //recursive - TC - O(N)  | SC - O(N)
     public int sumOfLeftLeaves(TreeNode root) {
         util(false, root);
         return sum;
@@ -70,5 +70,33 @@ class SumOfLeftLeaves {
         }
         util(true, node.left);
         util(false, node.right);
+    }
+
+    //morris traversal - TC - O(N)  | SC - O(1)
+    public int sumOfLeftLeavesMorris(TreeNode root) {
+        int total = 0;
+        TreeNode currNode = root;
+
+        while (currNode != null) {
+            if (currNode.left == null) {
+                currNode = currNode.right;
+            } else {
+                TreeNode predecessor = currNode.left;
+                if (predecessor.left == null && predecessor.right == null) {
+                    total += predecessor.val;
+                }
+                while (predecessor.right != null && predecessor.right != currNode) {
+                    predecessor = predecessor.right;
+                }
+                if (predecessor.right == null) {
+                    predecessor.right = currNode;
+                    currNode = currNode.left;
+                } else {
+                    predecessor.right = null;
+                    currNode = currNode.right;
+                }
+            }
+        }
+        return total;
     }
 }
