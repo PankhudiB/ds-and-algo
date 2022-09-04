@@ -89,7 +89,7 @@ public class Traversal {
         Node curr = head;
 
         while (curr != null || stack.size() > 0) {
-            while (curr != null)  {
+            while (curr != null) {
                 stack.push(curr);
                 curr = curr.left;
             }
@@ -111,13 +111,13 @@ public class Traversal {
     void preOrderWithoutRecursion(Node head) {
         Stack<Node> stack = new Stack<>();
         List<Integer> l = new ArrayList<>();
-        if (head != null )stack.add(head);
+        if (head != null) stack.add(head);
 
-        while(!stack.isEmpty()) {
+        while (!stack.isEmpty()) {
             Node curr = stack.pop();
             System.out.print(curr.val + " ");
-            if( curr.right != null ) stack.push(curr.right);
-            if( curr.left != null ) stack.push(curr.left);
+            if (curr.right != null) stack.push(curr.right);
+            if (curr.left != null) stack.push(curr.left);
         }
     }
 
@@ -136,13 +136,13 @@ public class Traversal {
         List<Integer> result = new ArrayList<>();
         if (head != null) s1.add(head);
 
-        while(!s1.isEmpty()){
+        while (!s1.isEmpty()) {
             Node curr = s1.pop();
             s2.push(curr);
-            if (curr.left != null ) s1.push(curr.left);
-            if (curr.right != null ) s1.push(curr.right);
+            if (curr.left != null) s1.push(curr.left);
+            if (curr.right != null) s1.push(curr.right);
         }
-        while(!s2.isEmpty()){
+        while (!s2.isEmpty()) {
             System.out.print(s2.pop().val + " ");
         }
     }
@@ -187,15 +187,20 @@ public class Traversal {
         }
     }
 
-    void zigzagLevelOrder(Node head) {
+    List<List<Integer>> zigzagLevelOrder(Node head) {
+        if (head == null) {
+            return new LinkedList<>();
+        }
         Stack<Node> currLevel = new Stack<>();
         Stack<Node> nextLevel = new Stack<>();
         currLevel.push(head);
         boolean printRightToLeft = true;
+        List<List<Integer>> result = new LinkedList<>();
+        LinkedList<Integer> currList = new LinkedList<Integer>();
 
         while (!currLevel.isEmpty()) {
             Node popped = currLevel.pop();
-            System.out.print(popped.val + "==");
+            currList.add(popped.val);
 
             if (printRightToLeft) {
                 if (popped.left != null) nextLevel.push(popped.left);
@@ -207,11 +212,14 @@ public class Traversal {
 
             if (currLevel.isEmpty()) {
                 printRightToLeft = !printRightToLeft;
+                result.add(currList);
                 Stack<Node> temp = currLevel;
                 currLevel = nextLevel;
                 nextLevel = temp;
+                currList = new LinkedList<Integer>();
             }
         }
+        return result;
     }
 
     void morrisInorder(Node head) {
