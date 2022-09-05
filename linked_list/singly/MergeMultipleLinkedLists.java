@@ -1,5 +1,8 @@
 package linked_list.singly;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 class MergeMultipleLinkedLists {
     public static void main(String[] args) {
         LinkedListHelper helper = new LinkedListHelper();
@@ -66,5 +69,31 @@ class MergeMultipleLinkedLists {
             }
         }
         return lists[0];
+    }
+
+    //brute force
+    // TC -> Nlog(N) | SC -> Nlog(N)
+    public ListNode mergeKLists(ListNode[] lists) {
+        if(lists == null)
+            return null;
+
+        ArrayList<Integer> listWithAllNodes = new ArrayList<>();
+
+        for(ListNode head: lists){
+            while(head != null) {
+                listWithAllNodes.add(head.val);
+                head = head.next;
+            }
+        }
+
+        Collections.sort(listWithAllNodes);
+
+        ListNode pre = new ListNode(0);
+        ListNode last = pre;
+        for(int i=0; i< listWithAllNodes.size(); i++){
+            last.next = new ListNode(listWithAllNodes.get(i));
+            last = last.next;
+        }
+        return pre.next;
     }
 }
