@@ -83,6 +83,33 @@ class Merge2SortedLinkedLists {
         return head.next;
     }
 
+    //Trick : remember to maintain PreHead
+    // and previous pointer
+    ListNode mergeSimplifiedIterative(ListNode l1, ListNode l2) {
+        ListNode preHead = new ListNode(-1);
+        ListNode prev = preHead;
+
+        if (l1 == null && l2 == null) return null;
+        if (l1 == null) return l2;
+        if (l2 == null) return l1;
+
+        while (l1 != null && l2 != null) {
+            if (l1.val < l2.val) {
+                prev.next = l1;
+                l1 = l1.next;
+            } else {
+                prev.next = l2;
+                l2 = l2.next;
+            }
+            prev = prev.next;
+        }
+
+        if (l1 == null) prev.next = l2;
+        if (l2 == null) prev.next = l1;
+
+        return preHead.next;
+    }
+
     ListNode mergeRecursive(ListNode l1, ListNode l2) {
         if (l1 == null) {
             return l2;
