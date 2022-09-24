@@ -32,5 +32,30 @@ class TopKFrequentElements {
         return topKElements;
     }
 
+    // build freq map
+    // maintain min heap of k elements
+    // insert map entries to min heap
+    // TC -> O(N log K) | SC -> O(N + k) --> for map + heap
+    public static int[] topKFrequent(int[] nums, int k) {
+        HashMap<Integer, Integer> freqMap = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int freq = freqMap.getOrDefault(nums[i], 0);
+            freqMap.put(nums[i], ++freq);
+        }
+
+        //Alternative of (n1, n2) -> freqMap.get(n1) - freqMap.get(n2) ---> Comparator.comparingInt(freqMap::get)
+        Queue<Integer> heap = new PriorityQueue<>(Comparator.comparingInt(freqMap::get));
+
+        for (int n : freqMap.keySet()) {
+            heap.add(n);
+            if (heap.size() > k) heap.poll();
+        }
+
+        int[] topKElements = new int[k];
+        for (int i = k - 1; i >= 0; i--) {
+            topKElements[i] = heap.poll();
+        }
+        return topKElements;
+    }
 }
 
