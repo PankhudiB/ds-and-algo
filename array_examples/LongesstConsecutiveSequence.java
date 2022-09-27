@@ -1,6 +1,7 @@
 package array_examples;
 
 import java.util.Arrays;
+import java.util.HashSet;
 
 class LongesstConsecutiveSequence {
     public static void main(String[] args) {
@@ -11,6 +12,10 @@ class LongesstConsecutiveSequence {
         System.out.println("----------------------");
         System.out.println(l.longestConsecutiveBruteForce(new int[]{9, 1, 4, 7, 3, -1, 0, 5, 8, -1, 6}));
         System.out.println(l.longestConsecutiveBruteForce(new int[]{0, 3, 7, 2, 5, 8, 4, 6, 0, 1}));
+        System.out.println("----------------------");
+
+        System.out.println(l.longestConsecutiveEfficient(new int[]{9, 1, 4, 7, 3, -1, 0, 5, 8, -1, 6}));
+        System.out.println(l.longestConsecutiveEfficient(new int[]{0, 3, 7, 2, 5, 8, 4, 6, 0, 1}));
         System.out.println("----------------------");
     }
 
@@ -42,7 +47,6 @@ class LongesstConsecutiveSequence {
     // for each number
     //        while loop from number to ... number+1, number+2, number+3 ...
     //        until - u dont find the sub sequent no in input array
-
     public int longestConsecutiveBruteForce(int[] nums) {
         int n = nums.length;
         int longestStreak = 0;
@@ -70,5 +74,41 @@ class LongesstConsecutiveSequence {
         }
         return false;
     }
+
+    // brute force
+    // n^3 solution
+    // for each number
+    // if u find the number-1 in hasset --> skip
+    // if you dont find any --> then thats the start of our sequence
+    //        while loop from number to ... number+1, number+2, number+3 ...
+    //        until - u dont find the sub sequent no in input array -->
+    //        find in array - can be replaced by find in hashset
+    //
+    public int longestConsecutiveEfficient(int[] nums) {
+        int n = nums.length;
+        int longestStreak = 0;
+        int streakSoFar = 0;
+        if (n == 0 || n == 1) return n;
+
+        HashSet<Integer> set = new HashSet<>();
+        for (int num : nums) {
+            set.add(num);
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+
+            int current = nums[i];
+            if (!set.contains(current - 1)) {
+                streakSoFar = 1;
+                while (set.contains(current+1)){
+                    current = current + 1;
+                    streakSoFar++;
+                }
+                longestStreak = Math.max(longestStreak, streakSoFar);
+            }
+        }
+        return longestStreak;
+    }
+
 }
 
