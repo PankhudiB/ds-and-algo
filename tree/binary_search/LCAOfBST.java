@@ -30,4 +30,20 @@ public class LCAOfBST {
         }
         return root;
     }
+
+    // iterative
+    public TreeNode lowestCommonAncestorIterative(TreeNode root, TreeNode p, TreeNode q) {
+        TreeNode current = root;
+        int pVal = p.val;
+        int qVal = q.val;
+
+        while(current !=null ) {
+            if(pVal < current.val && qVal < current.val )
+                current = current.left;
+            else if(pVal > current.val && qVal > current.val )
+                current = current.right;
+            else return current;
+        }
+        return null;
+    }
 }
