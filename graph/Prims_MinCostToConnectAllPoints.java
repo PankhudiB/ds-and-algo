@@ -14,12 +14,13 @@ public class Prims_MinCostToConnectAllPoints {
         minDist - Array to track the minimum edge weight to reach the ith node from any node that is already in the tree.
 
 
-        1. add dummy entry -> minDist[0] = 0
-        2. until edgesUsed --> n-1 + dummy entry = n
-           2.1 pick node that is not in MST & has min edge weight
-           2.2 edgesUsed++ , mstCost+=minDist[picked_node] , inMST[picked_node] = true
-           2.3 update minDist of all from this particular node
-        3. return mstCost
+        1. set minDistToReachNode of all node to Infinite
+        2. add dummy entry -> minDistToReachNode[0] = 0
+        3. until edgesUsed --> n-1 + dummy entry = n
+           3.1 pick node that is not in MST & has min edge weight
+           3.2 edgesUsed++ , mstCost+=minDistToReachNode[picked_node] , inMST[picked_node] = true
+           3.3 update minDistToReachNode of all from this particular node
+        4. return mstCost
      */
 
     /*
@@ -32,21 +33,19 @@ public class Prims_MinCostToConnectAllPoints {
         int costOfMST = 0;
         int edgesUsed = 0;
         boolean[] inMST = new boolean[n];
-        int[] minDist = new int[n];
+        int[] minDistToReachNode = new int[n];
 
-        for (int i = 0; i < n; i++) {
-            minDist[i] = Integer.MAX_VALUE;
-        }
+        setAllDistToInfinite(n, minDistToReachNode);
 
         //dummy entry
-        minDist[0] = 0;
+        minDistToReachNode[0] = 0;
 
         while (edgesUsed < n) {
             int minEdgeWeight = Integer.MAX_VALUE;
             int pickedNode = -1;
             for (int i = 0; i < n; i++) {
-                if (!inMST[i] && minDist[i] < minEdgeWeight) {
-                    minEdgeWeight = minDist[i];
+                if (!inMST[i] && minDistToReachNode[i] < minEdgeWeight) {
+                    minEdgeWeight = minDistToReachNode[i];
                     pickedNode = i;
                 }
             }
@@ -56,15 +55,22 @@ public class Prims_MinCostToConnectAllPoints {
             System.out.println("->" + pickedNode);
             inMST[pickedNode] = true;
 
+            //update dist from pickedNode to others
             for (int nextNode = 0; nextNode < n; nextNode++) {
-                int weightFromPickedNode = Math.abs(points[pickedNode][0] - points[nextNode][0]) +
+                int distFromPickedNode = Math.abs(points[pickedNode][0] - points[nextNode][0]) +
                         Math.abs(points[pickedNode][1] - points[nextNode][1]);
 
-                if (!inMST[nextNode] && minDist[nextNode] > weightFromPickedNode) {
-                    minDist[nextNode] = weightFromPickedNode;
+                if (!inMST[nextNode] && minDistToReachNode[nextNode] > distFromPickedNode) {
+                    minDistToReachNode[nextNode] = distFromPickedNode;
                 }
             }
         }
         return costOfMST;
+    }
+
+    private void setAllDistToInfinite(int n, int[] minDistToReachNode) {
+        for (int i = 0; i < n; i++) {
+            minDistToReachNode[i] = Integer.MAX_VALUE;
+        }
     }
 }
