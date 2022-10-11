@@ -14,6 +14,15 @@ class Reverse {
         helper.printList(reversed2);
     }
 
+    // TIP :
+    // maintain 3 ptrs
+    // Prev , Curr
+    // in 1 iteration
+    // store curr.next in Next
+    // prev <--- curr.next
+    // move ptrs forward
+    // Prev = curr
+    // Curr = Next
     ListNode reverse(ListNode head) {
         ListNode prev = null;
         ListNode curr = head;
@@ -26,6 +35,9 @@ class Reverse {
         return prev;
     }
 
+    // TIP
+    // imagine end of list with 2 nodes and write recursive algo
+    // keep recursively calling
     ListNode reverseRecursive(ListNode curr) {
         if (curr == null || curr.next == null) return curr;
         ListNode p = reverseRecursive(curr.next);
