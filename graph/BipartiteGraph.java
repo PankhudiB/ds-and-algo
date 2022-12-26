@@ -1,9 +1,39 @@
 package graph;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
+
+/*
+
+    U      V
+    1      5
+    2      4
+    3      6
+
+there will be edges from u -> v OR v -> u
+but not within V OR within U
+
+    A Bipartite Graph is a graph whose vertices
+    can be divided into two independent sets, U and V
+    such that every edge (u, v) either connects a vertex from U to V
+     or a vertex from V to U
+
+
+    if no disconnected components in graph
+
+    maintain
+    color array -> keep filling colors
+    visited array
+
+    BFS or DFS
+        if visited
+            color[u] == color[neighbor] --> return false -> not bipartite - there is cycle with the set
+        else
+            time to color              
+            if u is white (1)
+                then neighbors of u --> black (0) [1 - color[u]]
+            
+
+ */
 
 public class BipartiteGraph {
     int noOfVertices;
@@ -53,13 +83,12 @@ public class BipartiteGraph {
         System.out.println("IsBipartite : " + graph4.isBipartite(0));
     }
 
+    //works for only connected graph
     private boolean isBipartite(int src) {
         boolean[] visited = new boolean[noOfVertices];
         int[] resultingClr = new int[noOfVertices];
         int currColor = 1;
-        for (int i = 0; i < noOfVertices; i++) {
-            resultingClr[i] = -1;
-        }
+        initColors(resultingClr, -1);
         resultingClr[src] = currColor;
         Queue<Integer> queue = new LinkedList<>();
         visited[src] = true;
@@ -85,8 +114,55 @@ public class BipartiteGraph {
         return true;
     }
 
+    //
+    private boolean isBipartiteAgain(int src) {
+
+        int[] color = new int[noOfVertices];
+        initColors(color, -1);
+        boolean[] visited = new boolean[noOfVertices];
+
+        for (int i = 0; i < noOfVertices; i++) { // to make it work for disconnected graph
+            if (color[i] == -1) {
+                if (BFS(color, visited, i)) return false;
+            }
+        }
+        System.out.println(Arrays.toString(color));
+        return true;
+    }
+
+    private boolean BFS(int[] color, boolean[] visited, int i) {
+        Queue<Integer> q = new LinkedList<>();
+        visited[i] = true;
+        q.add(i);
+        color[i] = 1;
+        while (!q.isEmpty()) {
+            Integer currNode = q.poll();
+            ArrayList<Integer> neighbors = adj.get(currNode);
+
+            for (int neighbor : neighbors) {
+                if (visited[neighbor]) {
+                    if (color[currNode] == color[neighbor]) {
+                        return false;
+                    }
+                } else {
+                    q.add(neighbor);
+                    color[neighbor] = 1 - color[currNode];
+                    visited[neighbor] = true;
+                }
+            }
+        }
+        return true;
+    }
+
+    private void initColors(int[] color, int k) {
+        for (int i = 0; i < noOfVertices; i++) {
+            color[i] = k;
+        }
+    }
+
     private void addEdge(int u, int v) {
         adj.get(u).add(v);
         adj.get(v).add(u);
     }
+
 }
