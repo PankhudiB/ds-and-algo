@@ -123,7 +123,7 @@ public class BipartiteGraph {
 
         for (int i = 0; i < noOfVertices; i++) { // to make it work for disconnected graph
             if (color[i] == -1) {
-                if (BFS(color, visited, i)) return false;
+                if (BFS(color, visited, i) == false) return false;
             }
         }
         System.out.println(Arrays.toString(color));
