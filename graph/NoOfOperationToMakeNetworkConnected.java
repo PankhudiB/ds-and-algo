@@ -3,6 +3,28 @@ package graph;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/*
+    In a graph with V nodes -->
+        for it to be minimally connected -> we need atleast V-1 edges [E = V-1]
+
+    Similarly when there are M strongly connected components -> you ll need atleast M-1 edges
+
+    1. Find noOfConnectedComponents
+    2. To find extra edges with strongly connected components
+        extra_edges = Current_no_edges - ( no of vertices - 1 ) - (noOfCC - 1)
+
+        if extra_edges >= (noOfCC - 1)
+            return (noOfCC - 1) [in order to use them for bridging rest of network] [Not extra_edges - becoz we want to minimally connect the graph]
+        else
+            there are not sufficient extra edges
+
+
+
+    Time complexity = time to find noOfCC
+        O(V+E) -> for DFS
+        DFS on all nodes --> V * (V+E)
+        total = O(V * (V+E))
+ */
 public class NoOfOperationToMakeNetworkConnected {
     private int v;
     private ArrayList<Integer> adj[];
@@ -10,15 +32,15 @@ public class NoOfOperationToMakeNetworkConnected {
     public static void main(String[] args) {
         NoOfOperationToMakeNetworkConnected g = new NoOfOperationToMakeNetworkConnected();
         int[][] connections = new int[][]{{0, 1}, {0, 2}, {0, 3}, {1, 2}, {1, 3}};
-        System.out.println("NoOfOperationtoMakeNetworkConnected : " + g.makeConnected(6,connections));
+        System.out.println("NoOfOperationtoMakeNetworkConnected : " + g.makeConnected(6, connections));
 
         NoOfOperationToMakeNetworkConnected g2 = new NoOfOperationToMakeNetworkConnected();
-        int[][] connections2 = new int[][]{{0,1},{0,2},{3,4},{2,3}};
-        System.out.println("NoOfOperationtoMakeNetworkConnected : " + g2.makeConnected(5,connections2));
+        int[][] connections2 = new int[][]{{0, 1}, {0, 2}, {3, 4}, {2, 3}};
+        System.out.println("NoOfOperationtoMakeNetworkConnected : " + g2.makeConnected(5, connections2));
 
         NoOfOperationToMakeNetworkConnected g3 = new NoOfOperationToMakeNetworkConnected();
-        int[][] connections3 = new int[][]{{0,1},{0,2},{0,3},{1,2}};
-        System.out.println("NoOfOperationtoMakeNetworkConnected : " + g3.makeConnected(6,connections3));
+        int[][] connections3 = new int[][]{{0, 1}, {0, 2}, {0, 3}, {1, 2}};
+        System.out.println("NoOfOperationtoMakeNetworkConnected : " + g3.makeConnected(6, connections3));
     }
 
     public int makeConnected(int n, int[][] connections) {
@@ -32,10 +54,10 @@ public class NoOfOperationToMakeNetworkConnected {
             this.addEdge(connection[0], connection[1]);
         }
 
-        int totalEdges = connections.length;
-        int noOfComponents = connectedComponents();
-        int redundantEdges = totalEdges - ((this.v - 1) - (noOfComponents - 1));
-        int noOfOperationstoMakeNetworkConnected = (redundantEdges >= (noOfComponents - 1)) ? (noOfComponents - 1) : -1;
+        int currEdges = connections.length;
+        int noOfCC = connectedComponents();
+        int extraEdges = currEdges - ((n - 1) - (noOfCC - 1));
+        int noOfOperationstoMakeNetworkConnected = (extraEdges >= (noOfCC - 1)) ? (noOfCC - 1) : -1;
         return noOfOperationstoMakeNetworkConnected;
     }
 
