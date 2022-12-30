@@ -1,9 +1,10 @@
-package graph;
+package graph.algos.articulation_point;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Stack;
 
+/*
+    READ Articulation.md
+ */
 public class ArticulationPoint {
     private int V;
     private ArrayList<Integer> adj[];
@@ -71,7 +72,7 @@ public class ArticulationPoint {
         time++;
         int children = 0;
         for (int v : adj[u]) {
-            if (discovery[v] == -1) {   //if v is visited
+            if (discovery[v] == -1) {   //if v is not visited
                 parent[v] = u;
                 children++;
                 DFS(v, discovery, low, parent, articulationPoints);

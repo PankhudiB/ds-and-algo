@@ -7,7 +7,7 @@ Conditions of AP
     1. If node u is root of DFS tree and has atleast 2 children
     
     
-![img_2.png](img_2.png)
+![img_2.png](../img_2.png)
 
 
     2. If node u is not root and atleast there's 1 child who does not have back-edge to ancestor of u 
@@ -19,7 +19,7 @@ Conditions of AP
     Here node 2 is not separable - has back edge  
 
 
-![img_3.png](img_3.png)
+![img_3.png](../img_3.png)
 
 
 Maintain
