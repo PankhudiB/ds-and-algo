@@ -63,7 +63,7 @@ Algorithm :
                 low[u] = min(low[u],low[v])
             else v already discovered :
                 if there is back edge (v presentInStack):
-                low[u] = min(low[u],disc[v])
+                    low[u] = min(low[u],disc[v])
         }
         
         after processing all neighbors 

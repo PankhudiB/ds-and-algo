@@ -24,7 +24,14 @@ import java.util.Iterator;
         O(V+E) -> for DFS
         DFS on all nodes --> V * (V+E)
         total = O(V * (V+E))
+
+Finding no Of Connected Components can be done by
+    1. no of vertices * DFS ==============================================> O(V+E)
+    2. Tarjan's -> maintain discovery[] and low[] array , back edges  ====> O(V+E)
+    3. union find =========================================================> O(E * α(n)) [BEST]
  */
+
+
 public class NoOfOperationToMakeNetworkConnected {
     private int v;
     private ArrayList<Integer> adj[];
