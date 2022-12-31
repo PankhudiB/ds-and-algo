@@ -1,15 +1,55 @@
 package graph.algos;
 
+/*
+    maintain :
+    1. visited arr
+    2. distances arr
+    3. parent arr
+
+    initialize distances to max value
+    mark all vertex to be unvisited
+
+    distance[src] = 0
+    parent[src] = no_parent
+
+    for i .. noOfVertices {
+        u = select Min distance Unvisited Node
+        visited[u] = True
+        for all neighbors / for all vertices V {
+            if (v not visited && (dist[u] + edge_weight(u,v) < dist[v]))
+                update  dist[v] = dist[u] + edge_weight(u,v)
+                make u as v's parent --> parent[v] = u
+        }
+    }
+
+    Result :
+        all distances updated in distance arr
+        paths from src to each node
+            recursively call path func
+
+   path(vertex):
+       base condi -> reached parent -> return
+       path(parent[vertex])
+       print(vertex + " " )
+
+   ===============
+
+   Time Complexity:
+
+   worst case -> O(V^2)
+
+   can be improved -> by using min heap
+ */
 public class Dijkstra {
     private static final int NO_PARENT = -1;
     int noOfVertices;
-    boolean[] processed;
+    boolean[] visited;
     int[] distances;
     int[] parent;
 
     public Dijkstra(int noOfVertices) {
         this.noOfVertices = noOfVertices;
-        processed = new boolean[noOfVertices];
+        visited = new boolean[noOfVertices];
         distances = new int[noOfVertices];
         parent = new int[noOfVertices];
     }
@@ -31,16 +71,16 @@ public class Dijkstra {
 
     private void dijkstra(int[][] graph, int src) {
         initializeDistancesToMaxValue();
-        markAllVertexToNotProcessed();
+        markAllVertexToNotVisited();
 
         this.parent[src] = NO_PARENT;
         this.distances[src] = 0;
 
         for (int i = 0; i < noOfVertices - 1; i++) {
-            int u = selectMinValueNode();
-            this.processed[u] = true;
+            int u = selectMinDistanceUnvisitedNode();
+            this.visited[u] = true;
             for (int v = 0; v < noOfVertices; v++) {
-                if (graph[u][v] != 0 && !this.processed[v] && distances[u] != Integer.MAX_VALUE && (this.distances[u] + graph[u][v]) < this.distances[v]) {
+                if (graph[u][v] != 0 && !this.visited[v] && distances[u] != Integer.MAX_VALUE && (this.distances[u] + graph[u][v]) < this.distances[v]) {
                     this.distances[v] = this.distances[u] + graph[u][v];
                     this.parent[v] = u;
                 }
@@ -55,17 +95,17 @@ public class Dijkstra {
         }
     }
 
-    private void markAllVertexToNotProcessed() {
+    private void markAllVertexToNotVisited() {
         for (int i = 0; i < noOfVertices; i++) {
-            this.processed[i] = false;
+            this.visited[i] = false;
         }
     }
 
-    private int selectMinValueNode() {
+    private int selectMinDistanceUnvisitedNode() {
         int min = Integer.MAX_VALUE;
         int vertex = 0;
         for (int i = 0; i < this.distances.length; i++) {
-            if (this.distances[i] < min && !this.processed[i]) {
+            if (this.distances[i] < min && !this.visited[i]) {
                 vertex = i;
                 min = this.distances[i];
             }
