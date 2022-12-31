@@ -2,6 +2,24 @@ package graph;
 
 import java.util.*;
 
+/*
+    Pseudo
+    maintain :
+
+    availableColors array -> set all to be available
+    result array -> set all -1
+
+    set color[src] = some_color (0)
+
+    for all u {
+       neighbors = adj[u]
+       mark_all_unavailable_colors() ----> loop over all neighbors -> if they are colored(result[v] != -1) -> mark the neighbor's color to be unavailable
+       get first available clr
+       assign it to color[u]
+       RESET all colors to available :)
+    }
+
+ */
 public class GraphColoring {
     int noOfVertices;
     ArrayList<ArrayList<Integer>> adj;
@@ -22,7 +40,7 @@ public class GraphColoring {
         graph.addEdge(2, 4);
         graph.addEdge(3, 4);
 
-        graph.printArr(graph.paint(0));
+        graph.printArr(graph.paintEfficient(0));
 
         GraphColoring graph2 = new GraphColoring(5);
         graph2.addEdge(0, 1);
@@ -32,14 +50,14 @@ public class GraphColoring {
         graph2.addEdge(3, 4);
         graph2.addEdge(0, 3);
 
-        graph.printArr(graph2.paint(0));
+        graph.printArr(graph2.paintEfficient(0));
 
         GraphColoring graph3 = new GraphColoring(3);
         graph3.addEdge(0, 1);
         graph3.addEdge(1, 2);
         graph3.addEdge(0, 2);
 
-        graph.printArr(graph3.paint(0));
+        graph.printArr(graph3.paintEfficient(0));
 
         GraphColoring graph4 = new GraphColoring(4);
         graph4.addEdge(0, 1);
@@ -47,61 +65,46 @@ public class GraphColoring {
         graph4.addEdge(2, 3);
         graph4.addEdge(3, 0);
 
-        graph.printArr(graph4.paint(0));
-    }
-
-    private int[] paint(int src) {
-        int[] result = new int[noOfVertices];
-        boolean[] available = new boolean[noOfVertices];
-        int currColor = 1;
-        for (int i = 0; i < noOfVertices; i++) {
-            result[i] = -1;
-            available[i] = true;
-        }
-        result[src] = currColor;
-        for (int curr = 1; curr < noOfVertices; curr++) {
-            Iterator<Integer> itr = adj.get(curr).iterator();
-            while (itr.hasNext()) {
-                Integer neighbour = itr.next();
-                if (result[neighbour] != -1) {
-                    available[result[neighbour]] = false;
-                }
-            }
-            int firstAvailableClr;
-            for (firstAvailableClr = 0; firstAvailableClr < noOfVertices; firstAvailableClr++) {
-                if (available[firstAvailableClr]) break;
-            }
-            result[curr] = firstAvailableClr;
-            Arrays.fill(available, true);
-        }
-        return result;
+        graph.printArr(graph4.paintEfficient(0));
     }
 
     private int[] paintEfficient(int src) {
         int[] result = new int[noOfVertices];
-        boolean[] available = new boolean[noOfVertices];
-        int currColor = 1;
-        for (int i = 0; i < noOfVertices; i++) {
-            result[i] = -1;
-            available[i] = true;
-        }
-        result[src] = currColor;
+        boolean[] availableClrs = new boolean[noOfVertices];
+        init(result, availableClrs);
+
+        result[src] = 1;
+
         for (int curr = 1; curr < noOfVertices; curr++) {
-            Iterator<Integer> itr = adj.get(curr).iterator();
-            while (itr.hasNext()) {
-                Integer neighbour = itr.next();
-                if (result[neighbour] != -1) {
-                    available[result[neighbour]] = false;
-                }
-            }
-            int firstAvailableClr;
-            for (firstAvailableClr = 0; firstAvailableClr < noOfVertices; firstAvailableClr++) {
-                if (available[firstAvailableClr]) break;
-            }
-            result[curr] = firstAvailableClr;
-            Arrays.fill(available, true);
+            ArrayList<Integer> neighbors = adj.get(curr);
+            markUnavailableClrs(result, availableClrs, neighbors);
+            result[curr] = getFirstAvailableClr(availableClrs);
+            Arrays.fill(availableClrs, true); // RESET
         }
         return result;
+    }
+
+    private void markUnavailableClrs(int[] result, boolean[] availableClrs, ArrayList<Integer> neighbors) {
+        for (Integer neighbor : neighbors) {
+            if (result[neighbor] != -1) {
+                availableClrs[result[neighbor]] = false;
+            }
+        }
+    }
+
+    private int getFirstAvailableClr(boolean[] availableClrs) {
+        int firstAvailableClr;
+        for (firstAvailableClr = 0; firstAvailableClr < noOfVertices; firstAvailableClr++) {
+            if (availableClrs[firstAvailableClr]) break;
+        }
+        return firstAvailableClr;
+    }
+
+    private void init(int[] result, boolean[] availableClrs) {
+        for (int i = 0; i < noOfVertices; i++) {
+            result[i] = -1;
+            availableClrs[i] = true;
+        }
     }
 
     private void addEdge(int u, int v) {
