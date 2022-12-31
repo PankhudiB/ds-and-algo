@@ -5,12 +5,12 @@ import java.util.ArrayList;
 /*
     READ Articulation.md
  */
-public class ArticulationPoint {
+public class ArticulationPoint_ {
     private int V;
     private ArrayList<Integer> adj[];
     static int time = 0;
 
-    public ArticulationPoint(int v) {
+    public ArticulationPoint_(int v) {
         this.V = v;
         adj = new ArrayList[v];
         for (int i = 0; i < v; i++) {
@@ -19,7 +19,7 @@ public class ArticulationPoint {
     }
 
     public static void main(String[] args) {
-        ArticulationPoint g = new ArticulationPoint(5);
+        ArticulationPoint_ g = new ArticulationPoint_(5);
         /*
 
         1 ----*0 ----* 3 ---* 4

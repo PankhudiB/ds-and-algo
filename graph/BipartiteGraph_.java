@@ -35,11 +35,11 @@ but not within V OR within U
 
  */
 
-public class BipartiteGraph {
+public class BipartiteGraph_ {
     int noOfVertices;
     ArrayList<ArrayList<Integer>> adj;
 
-    public BipartiteGraph(int noOfVertices) {
+    public BipartiteGraph_(int noOfVertices) {
         this.noOfVertices = noOfVertices;
         adj = new ArrayList<>(noOfVertices);
         for (int i = 0; i < noOfVertices; i++) {
@@ -48,7 +48,7 @@ public class BipartiteGraph {
     }
 
     public static void main(String[] args) {
-        BipartiteGraph graph = new BipartiteGraph(5);
+        BipartiteGraph_ graph = new BipartiteGraph_(5);
         graph.addEdge(0, 1);
         graph.addEdge(1, 2);
         graph.addEdge(1, 3);
@@ -57,7 +57,7 @@ public class BipartiteGraph {
 
         System.out.println("IsBipartite : " + graph.isBipartite(0));
 
-        BipartiteGraph graph2 = new BipartiteGraph(5);
+        BipartiteGraph_ graph2 = new BipartiteGraph_(5);
         graph2.addEdge(0, 1);
         graph2.addEdge(1, 2);
         graph2.addEdge(1, 3);
@@ -67,14 +67,14 @@ public class BipartiteGraph {
 
         System.out.println("IsBipartite : " + graph2.isBipartite(0));
 
-        BipartiteGraph graph3 = new BipartiteGraph(3);
+        BipartiteGraph_ graph3 = new BipartiteGraph_(3);
         graph3.addEdge(0, 1);
         graph3.addEdge(1, 2);
         graph3.addEdge(0, 2);
 
         System.out.println("IsBipartite : " + graph3.isBipartite(0));
 
-        BipartiteGraph graph4 = new BipartiteGraph(4);
+        BipartiteGraph_ graph4 = new BipartiteGraph_(4);
         graph4.addEdge(0, 1);
         graph4.addEdge(1, 2);
         graph4.addEdge(2, 3);

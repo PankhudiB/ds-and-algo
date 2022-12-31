@@ -20,11 +20,11 @@ import java.util.*;
     }
 
  */
-public class GraphColoring {
+public class GraphColoring_ {
     int noOfVertices;
     ArrayList<ArrayList<Integer>> adj;
 
-    public GraphColoring(int noOfVertices) {
+    public GraphColoring_(int noOfVertices) {
         this.noOfVertices = noOfVertices;
         adj = new ArrayList<>(noOfVertices);
         for (int i = 0; i < noOfVertices; i++) {
@@ -33,7 +33,7 @@ public class GraphColoring {
     }
 
     public static void main(String[] args) {
-        GraphColoring graph = new GraphColoring(5);
+        GraphColoring_ graph = new GraphColoring_(5);
         graph.addEdge(0, 1);
         graph.addEdge(1, 2);
         graph.addEdge(1, 3);
@@ -42,7 +42,7 @@ public class GraphColoring {
 
         graph.printArr(graph.paintEfficient(0));
 
-        GraphColoring graph2 = new GraphColoring(5);
+        GraphColoring_ graph2 = new GraphColoring_(5);
         graph2.addEdge(0, 1);
         graph2.addEdge(1, 2);
         graph2.addEdge(1, 3);
@@ -52,14 +52,14 @@ public class GraphColoring {
 
         graph.printArr(graph2.paintEfficient(0));
 
-        GraphColoring graph3 = new GraphColoring(3);
+        GraphColoring_ graph3 = new GraphColoring_(3);
         graph3.addEdge(0, 1);
         graph3.addEdge(1, 2);
         graph3.addEdge(0, 2);
 
         graph.printArr(graph3.paintEfficient(0));
 
-        GraphColoring graph4 = new GraphColoring(4);
+        GraphColoring_ graph4 = new GraphColoring_(4);
         graph4.addEdge(0, 1);
         graph4.addEdge(1, 2);
         graph4.addEdge(2, 3);

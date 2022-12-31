@@ -2,7 +2,7 @@ package graph;
 
 import java.util.*;
 
-public class GraphColoringEfficient_WelshPowell {
+public class GraphColoringEfficient_WelshPowell_ {
     int noOfVertices;
 
     class Vertex {
@@ -41,7 +41,7 @@ public class GraphColoringEfficient_WelshPowell {
 
     ArrayList<Vertex> vertices;
 
-    public GraphColoringEfficient_WelshPowell(int noOfVertices) {
+    public GraphColoringEfficient_WelshPowell_(int noOfVertices) {
         this.noOfVertices = noOfVertices;
         vertices = new ArrayList<>(noOfVertices);
         for (int i = 0; i < noOfVertices; i++) {
@@ -50,7 +50,7 @@ public class GraphColoringEfficient_WelshPowell {
     }
 
     public static void main(String[] args) {
-        GraphColoringEfficient_WelshPowell graph2 = new GraphColoringEfficient_WelshPowell(5);
+        GraphColoringEfficient_WelshPowell_ graph2 = new GraphColoringEfficient_WelshPowell_(5);
 //              /  2  \
 //        0 - 1    |    4
 //              \  3  /

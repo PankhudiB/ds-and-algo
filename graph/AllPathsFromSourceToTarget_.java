@@ -4,7 +4,26 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class AllPathsFromSourceToTargetUsingBFS {
+/*
+    Pseudo-code
+
+dfs-recursive(curr, pathSoFar)
+   with base condition -> target found
+   else
+        loop over neighbors
+            if neighbor not already in curr path
+                pathSoFar.add(neigh)
+                dfs-recursive(neigh. pathSoFar)
+                pathSoFar.remove(neigh)
+
+TC ->
+no of possible paths => between 2 nodes --> 2^N - 1 no of paths
+To construct each path -- we will need O(N)
+
+TC => O(N * 2^N)
+
+*/
+public class AllPathsFromSourceToTarget_ {
     int target;
     List<List<Integer>> allPossiblePaths;
     int[][] graph;
@@ -18,8 +37,8 @@ public class AllPathsFromSourceToTargetUsingBFS {
     //         ---> 4  <----- 3 <------- 2
 
     public static void main(String[] args) {
-        AllPathsFromSourceToTargetUsingBFS r = new AllPathsFromSourceToTargetUsingBFS();
-        int maze[][] = {{4, 3, 1}, {3, 2, 4}, {3}, {4}, {}};
+        AllPathsFromSourceToTarget_ r = new AllPathsFromSourceToTarget_();
+        int maze[][] = {{4, 3, 1}, {3, 2, 4}, {3}, {0, 4}, {}};
         System.out.println(r.allPathsSourceTarget(maze));
 
         int maze2[][] = {{1}, {}};
@@ -44,9 +63,11 @@ public class AllPathsFromSourceToTargetUsingBFS {
         }
 
         for (Integer nextNode : graph[curr]) {
-            pathSoFar.addLast(nextNode);
-            backtrack(nextNode, pathSoFar);
-            pathSoFar.removeLast();
+            if (!pathSoFar.contains(nextNode)) {
+                pathSoFar.addLast(nextNode);
+                backtrack(nextNode, pathSoFar);
+                pathSoFar.removeLast();
+            }
         }
     }
 

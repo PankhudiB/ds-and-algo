@@ -4,7 +4,7 @@ package graph.algos;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class TarjansStronglyConnectedComponentsAlgo {
+public class TarjansStronglyConnectedComponentsAlgo_ {
     ArrayList<Integer> adj[];
     int N;
     static int time = 0;
@@ -77,7 +77,7 @@ public class TarjansStronglyConnectedComponentsAlgo {
     }
 
     public static void main(String[] args) {
-        TarjansStronglyConnectedComponentsAlgo t = new TarjansStronglyConnectedComponentsAlgo();
+        TarjansStronglyConnectedComponentsAlgo_ t = new TarjansStronglyConnectedComponentsAlgo_();
         t.printConnectedComponents(5, new int[][]{{0, 1}, {1, 2}, {3, 4}});
     }
 }
