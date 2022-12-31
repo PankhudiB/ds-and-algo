@@ -7,13 +7,21 @@
         DFS
         removing from path 
 
+### Dijkstra | Bellmanford | Prim | Kruskal
+
+- Dijkstra and Bellmanford ----> From single source --> shortest path to rest of nodes
+  - Dijkstra - Greedy - only for positive edge weights
+  - Bellmanford - DP - works for negative edge weights
+- Prims and Kruskal ----> MST
+  - Prims - Traverses 1 node more than one time to get the minimum distance.
+  - Kruskal - Traverses 1 node only once.
+
 ### Find strongly connected components: 
     1. DFS =========================================> O(V+E)
     2. Tarjan's ->   ===============================> O(V+E)
         maintain discovery[] and low[] array
         back edges, ancestors
     3. union find ===================================> O(E * α(n)) [BEST]
-
 
 ### Union Find
     maintain 
