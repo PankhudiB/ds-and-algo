@@ -1,5 +1,6 @@
 package graph.algos;
 
+
 public class BellmanFord {
     private static final int NO_PARENT = -1;
     int V, E;
@@ -71,6 +72,32 @@ public class BellmanFord {
         b.isNegativeCycleBellmanFord(graph, 0);
     }
 
+    /*
+    maintain :
+    1. dist array
+    2. parent array
+
+    the following ensures to give us the shortest path from u -> v -- using all no of edges possible in between u and v
+
+    for i.. noOfVertices :
+        for j .. noOfEdges :
+            u ---wt---> v
+            if ( u != max_int && dist[u] + wt < dist[v] {
+                update dist[v] = dist[u] + wt
+                update parent[v] = u
+            }
+
+
+    once we have done the above and if we loop again and find if between u and v there is possibility of shorter distance
+        if we do --> then definitely we have negative edge weight.
+
+    for i .. noOFEdges :
+        u ---wt---> v
+        if dist[v] != max_int && dist[u] + wt < dist[v]
+            RETURN !!! NEGATIVE EDGE WEIGHT CYCLE FOUND
+
+    TIME COMPLEXITY = O (V * E) 
+     */
     private void isNegativeCycleBellmanFord(Graph graph, int src) {
         V = graph.V;
         E = graph.E;
