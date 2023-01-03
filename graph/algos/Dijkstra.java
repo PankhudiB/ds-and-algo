@@ -1,13 +1,14 @@
 package graph.algos;
 
 /*
+    GREEDY ALGO
     maintain :
     1. visited arr
     2. distances arr
     3. parent arr
 
-    initialize distances to max value
-    mark all vertex to be unvisited
+    initialize distances -> max_value
+    mark all vertex --> unvisited
 
     distance[src] = 0
     parent[src] = no_parent

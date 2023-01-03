@@ -1,5 +1,28 @@
 package graph.algos;
 
+/*
+    GREEDY ALGO
+    maintain :
+    1. inMST arr
+    2. distances arr
+    3. parent arr
+
+    initialize distances -> max_value
+    mark all vertex --> NOT in MST
+
+    distance[src] = 0
+    parent[src] = no_parent
+
+    for i .. noOfVertices {
+        u = select Min distance Not inMST Node
+        inMST[u] = True
+        for all neighbors / for all vertices V {
+            if ( v notInMST && (edge_weight(u,v) < dist[v]))
+                dist[v] = edge_weight(u,v)
+                parent[v] = u
+        }
+    }
+ */
 public class PrimsAlgoToFindMST {
     private static final int NO_PARENT = -1;
     int noOfVertices;
@@ -44,7 +67,7 @@ public class PrimsAlgoToFindMST {
         parent[0] = NO_PARENT;
 
         for (int i = 0; i < noOfVertices - 1; i++) {
-            int u = selectMinValueNode();
+            int u = selectMinDistNodeNotPartOfMST();
             mstSet[u] = true;
             for (int v = 0; v < noOfVertices; v++) {
                 if (graph[u][v] != 0 && !mstSet[v] && graph[u][v] < distance[v]) {
@@ -68,7 +91,7 @@ public class PrimsAlgoToFindMST {
         }
     }
 
-    private int selectMinValueNode() {
+    private int selectMinDistNodeNotPartOfMST() {
         int min = Integer.MAX_VALUE;
         int vertex = 0;
         for (int i = 0; i < this.distance.length; i++) {
