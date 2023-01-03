@@ -2,9 +2,30 @@ package graph.algos;
 
 import java.util.Arrays;
 
+/*
+    Intent -> find MST
+
+    underlying Uses Union-Find
+
+    1. Sort all edges available
+    2. init union-find --> (make everyone parent of themselves + set all rank =0)
+    3. pick all edges 1 by 1:
+        in an edge -> u --> v
+            x = find(u)
+            y = find(v)
+
+            if(x!=y) // if they are not already connected
+                add this edge to result
+                union(u,v)
+
+    4. mstCost = 0
+    5. result array has the edges that form MST - use this to calculate MST
+ */
 public class Kruskals {
     int V, E;
     Edge edge[];
+    int[] parent;
+    int[] rank;
 
     class Edge implements Comparable<Edge> {
         int src, dest, weight;
@@ -22,11 +43,6 @@ public class Kruskals {
         for (int i = 0; i < E; i++) {
             edge[i] = new Edge();
         }
-    }
-
-    class subset {
-        int parent;
-        int rank;
     }
 
     public static void main(String[] args) {
@@ -72,62 +88,69 @@ public class Kruskals {
     }
 
     private void KruskalMST() {
-        Edge result[] = new Edge[V-1];
-        for (int i = 0; i < V-1; i++) {
-            result[i] = new Edge();
-        }
+        Edge[] result = initResultEdges();
+
         Arrays.sort(edge);
-        subset subsets[] = new subset[V];
-        for (int i = 0; i < V; i++) {
-            subsets[i] = new subset();
-        }
-        for (int v = 0; v < V; v++) {
-            subsets[v].parent = v;
-            subsets[v].rank = 0;
-        }
+
+        initParentAndRank();
 
         int resultItr = 0;
         int edgeItr = 0;
         while (resultItr < V - 1) {
-            Edge nextEdge = new Edge();
-            nextEdge = edge[edgeItr++];
+            Edge nextEdge = edge[edgeItr++];
 
-            int x = find(subsets, nextEdge.src);
-            int y = find(subsets, nextEdge.dest);
+            int x = find(nextEdge.src);
+            int y = find(nextEdge.dest);
 
             if (x != y) {
                 result[resultItr++] = nextEdge;
-                union(subsets, x, y);
+                union(x, y);
             }
         }
 
         int minCost = 0;
-        for (int i = 0; i < edgeItr-1; i++) {
+        for (int i = 0; i < edgeItr - 1; i++) {
             System.out.println(result[i].src + "-->" + result[i].dest + " wt: " + result[i].weight);
             minCost += result[i].weight;
         }
         System.out.println("Min cost spanning tree :" + minCost);
     }
 
-
-    private int find(subset[] subsets, int i) {
-        if (subsets[i].parent == i) return i;
-        subsets[i].parent = find(subsets, subsets[i].parent);
-        return subsets[i].parent;
+    private void initParentAndRank() {
+        parent = new int[V];
+        rank = new int[V];
+        for (int v = 0; v < V; v++) {
+            parent[v] = v;
+            rank[v] = 0;
+        }
     }
 
-    private void union(subset[] subsets, int x, int y) {
+    private Edge[] initResultEdges() {
+        Edge result[] = new Edge[V - 1];
+        for (int i = 0; i < V - 1; i++) {
+            result[i] = new Edge();
+        }
+        return result;
+    }
 
-        int rootx = this.find(subsets, x);
-        int rooty = this.find(subsets, y);
+    private int find(int i) {
+        if (parent[i] == i) return i;
+        parent[i] = find(parent[i]);
+        return parent[i];
+    }
 
-        if (subsets[rootx].rank > subsets[rooty].rank) {
-            subsets[rooty].parent = rootx;
-        } else if (subsets[rootx].rank < subsets[rooty].rank) {
-            subsets[rootx].parent = rooty;
+    private void union(int x, int y) {
+
+        int rootx = this.find(x);
+        int rooty = this.find(y);
+
+        if (rank[rootx] > rank[rooty]) {
+            parent[rooty] = rootx;
+        } else if (rank[rootx] < rank[rooty]) {
+            parent[rootx] = rooty;
         } else {
-            subsets[rooty].parent = rootx;
-            subsets[rootx].rank++;
+            parent[rooty] = rootx;
+            rank[rootx]++;
         }
     }
 }
