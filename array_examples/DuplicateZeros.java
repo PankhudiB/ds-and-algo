@@ -7,7 +7,6 @@ public class DuplicateZeros {
             int end = arr.length-1;
 
             int[] duplicate = new int[arr.length];
-
             for(int i=0; i<arr.length; i++) {
                 duplicate[i] = arr[i];
             }
