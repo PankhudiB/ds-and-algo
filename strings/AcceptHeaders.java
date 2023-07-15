@@ -12,7 +12,7 @@ public class AcceptHeaders {
     public List<String> parse_accept_language(String clientHeader, String[] serverSupported) {
         Set<String> serverSupportedHeaders = new HashSet<>(Arrays.asList(serverSupported));
         List<String> result = new ArrayList<>();
-        
+
         Arrays.stream(clientHeader.split(",")).map(String::trim).filter(serverSupportedHeaders::contains).forEach(result::add);
         return result;
     }
