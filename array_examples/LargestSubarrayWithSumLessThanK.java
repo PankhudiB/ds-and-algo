@@ -1,13 +1,9 @@
 package array_examples;
 
-import util.ArrayUtil;
-
-import java.util.Arrays;
-import java.util.List;
-
-public class SlidingWindow {
+//Sliding window ~~~~~~
+public class LargestSubarrayWithSumLessThanK {
     public static void main(String[] args) {
-        SlidingWindow s = new SlidingWindow();
+        LargestSubarrayWithSumLessThanK s = new LargestSubarrayWithSumLessThanK();
         System.out.println(s.largestSubarrayWithSumLessThanK(new int[]{3, 1, 2, 7, 4, 2, 1, 1, 5}, 8));
     }
 
