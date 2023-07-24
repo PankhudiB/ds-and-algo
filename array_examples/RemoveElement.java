@@ -21,4 +21,31 @@ class RemoveElement {
         }
         return (val_first_at == -1) ? nums.length : val_first_at;
     }
+
+    public int removeElement1(int[] nums, int val) {
+        int left = 0;
+        int right = nums.length - 1;
+        int occurance = 0;
+        if (nums.length == 1 && nums[0] == val) return 0;
+
+        while (left <= right) {
+            while (right >= 0 && nums[right] == val) {
+                occurance++;
+                right--;
+            }
+            if (left > right) break;
+            if (nums[left] == val) {
+                occurance++;
+                int temp = nums[left];
+                nums[left] = nums[right];
+                nums[right] = temp;
+                left++;
+                right--;
+            } else {
+                left++;
+            }
+        }
+
+        return nums.length - occurance;
+    }
 }
